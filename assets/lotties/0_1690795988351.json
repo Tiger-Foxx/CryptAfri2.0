@@ -1,0 +1,153 @@
+[
+    {
+        "version": "1.0",
+        "image": {
+            "name": "0_1690795988351.jpg",
+            "baseName": "0_1690795988351.jpg",
+            "format": "PNG",
+            "formatDescription": "PNG",
+            "mimeType": "image\/png",
+            "class": "DirectClass",
+            "geometry": {
+                "width": 500,
+                "height": 500,
+                "x": 0,
+                "y": 0
+            },
+            "resolution": {
+                "x": 37.8,
+                "y": 37.8
+            },
+            "printSize": {
+                "x": 13.2275,
+                "y": 13.2275
+            },
+            "units": "PixelsPerCentimeter",
+            "type": "TrueColorAlpha",
+            "baseType": "Undefined",
+            "endianness": "Undefined",
+            "colorspace": "sRGB",
+            "depth": 8,
+            "baseDepth": 8,
+            "channelDepth": {
+                "alpha": 8,
+                "red": 8,
+                "green": 8,
+                "blue": 8
+            },
+            "pixels": 1000000,
+            "imageStatistics": {
+                "Overall": {
+                    "min": 0,
+                    "max": 255,
+                    "mean": 45.2632,
+                    "median": 0,
+                    "standardDeviation": 76.9612,
+                    "kurtosis": 1.15346,
+                    "skewness": 1.65245,
+                    "entropy": 0.340107
+                }
+            },
+            "channelStatistics": {
+                "alpha": {
+                    "min": 0,
+                    "max": 255,
+                    "mean": 77.4012,
+                    "median": 0,
+                    "standardDeviation": 116.714,
+                    "kurtosis": -1.26235,
+                    "skewness": 0.854439,
+                    "entropy": 0.136634
+                },
+                "red": {
+                    "min": 0,
+                    "max": 255,
+                    "mean": 49.2336,
+                    "median": 0,
+                    "standardDeviation": 83.1091,
+                    "kurtosis": 0.281054,
+                    "skewness": 1.36783,
+                    "entropy": 0.414221
+                },
+                "green": {
+                    "min": 0,
+                    "max": 255,
+                    "mean": 33.4641,
+                    "median": 0,
+                    "standardDeviation": 62.56,
+                    "kurtosis": 1.75819,
+                    "skewness": 1.75407,
+                    "entropy": 0.41517
+                },
+                "blue": {
+                    "min": 0,
+                    "max": 255,
+                    "mean": 20.9541,
+                    "median": 0,
+                    "standardDeviation": 45.4615,
+                    "kurtosis": 5.87886,
+                    "skewness": 2.49398,
+                    "entropy": 0.394402
+                }
+            },
+            "alpha": "#00000000",
+            "renderingIntent": "Perceptual",
+            "gamma": 0.454545,
+            "chromaticity": {
+                "redPrimary": {
+                    "x": 0.64,
+                    "y": 0.33
+                },
+                "greenPrimary": {
+                    "x": 0.3,
+                    "y": 0.6
+                },
+                "bluePrimary": {
+                    "x": 0.15,
+                    "y": 0.06
+                },
+                "whitePrimary": {
+                    "x": 0.3127,
+                    "y": 0.329
+                }
+            },
+            "matteColor": "#BDBDBD",
+            "backgroundColor": "#FFFFFF",
+            "borderColor": "#DFDFDF",
+            "transparentColor": "#00000000",
+            "interlace": "None",
+            "intensity": "Undefined",
+            "compose": "Over",
+            "pageGeometry": {
+                "width": 500,
+                "height": 500,
+                "x": 0,
+                "y": 0
+            },
+            "dispose": "Undefined",
+            "iterations": 0,
+            "compression": "Zip",
+            "orientation": "Undefined",
+            "properties": {
+                "date:create": "2023-07-31T09:33:12+00:00",
+                "date:modify": "2023-07-31T09:33:12+00:00",
+                "date:timestamp": "2023-07-31T09:34:31+00:00",
+                "png:IHDR.bit-depth-orig": "8",
+                "png:IHDR.bit_depth": "8",
+                "png:IHDR.color-type-orig": "6",
+                "png:IHDR.color_type": "6 (RGBA)",
+                "png:IHDR.interlace_method": "0 (Not interlaced)",
+                "png:IHDR.width,height": "500, 500",
+                "png:pHYs": "x_res=3780, y_res=3780, units=1",
+                "png:sRGB": "intent=0 (Perceptual Intent)",
+                "signature": "93d979e503a193a0ee681e35ef56f50aee0ad72fd1fd62a8c16d9de4d90a31f6"
+            },
+            "tainted": false,
+            "filesize": "189652B",
+            "numberPixels": "250000",
+            "pixelsPerSecond": "149.661MB",
+            "userTime": "0.010u",
+            "elapsedTime": "0:01.001"
+        }
+    }
+]

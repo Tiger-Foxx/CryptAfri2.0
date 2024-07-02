@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "1035793599455",
+    "project_id": "cryptoapp-a71a5",
+    "storage_bucket": "cryptoapp-a71a5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1035793599455:android:0cb16665397210887b126a",
+        "android_client_info": {
+          "package_name": "com.example.cryptafri"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1035793599455-lvd7kqhig50dn3b3httj3mir7mbuq650.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cryptafri",
+            "certificate_hash": "3a6952590ff8698cc7a3e20734df11a0cf9c0e6c"
+          }
+        },
+        {
+          "client_id": "1035793599455-7q52ptkuf8p6vipuhgqk3i4ga3aqvo44.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDxQCqMY4GhiEOHk7mqE_fJ3J1cL7Abw0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1035793599455-7q52ptkuf8p6vipuhgqk3i4ga3aqvo44.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1035793599455-lj2i4eomceuvifebpu2fm58vla5iqjgr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.foxApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

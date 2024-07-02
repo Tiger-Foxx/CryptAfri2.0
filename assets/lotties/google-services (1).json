@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "240301881699",
+    "project_id": "foxshop-ce854",
+    "storage_bucket": "foxshop-ce854.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:240301881699:android:7b30276c509922ba137b56",
+        "android_client_info": {
+          "package_name": "com.example.cryptafri"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "240301881699-ibn3dmgaa1vo1bdfp00bru76v10lh357.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cryptafri",
+            "certificate_hash": "922dfadb0ae431b0dc9a449db0e8267e1ea60b0f"
+          }
+        },
+        {
+          "client_id": "240301881699-nkdeok2g1sbs1dtiv6e9umki01voqcqt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZVQm7Fqvav7e9TjftU517Sj0RQq0mQgo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "240301881699-hovl9v9el1l0vuvke3vpthknitej8231.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "240301881699-ov3k1jr66qbegjb3p1mr4bd8a4o2a8jm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.foxApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

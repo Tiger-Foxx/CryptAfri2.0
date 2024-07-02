@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "240301881699",
+    "project_id": "foxshop-ce854",
+    "storage_bucket": "foxshop-ce854.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:240301881699:android:7b30276c509922ba137b56",
+        "android_client_info": {
+          "package_name": "com.example.cryptafri"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "240301881699-hovl9v9el1l0vuvke3vpthknitej8231.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZVQm7Fqvav7e9TjftU517Sj0RQq0mQgo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "240301881699-hovl9v9el1l0vuvke3vpthknitej8231.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

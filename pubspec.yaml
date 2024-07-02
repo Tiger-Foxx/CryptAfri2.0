@@ -1,0 +1,88 @@
+name: cryptafri
+description: A new Flutter project.
+publish_to: none
+version: 0.1.0
+environment:
+  sdk: ">=2.19.6 <4.0.0"
+dependencies:
+  firebase_admin: ^0.2.0
+  awesome_notifications: ^0.8.2
+  badges: ^3.1.1
+  cloud_firestore: ^4.8.4
+  email_validator: ^2.1.17
+  firebase: ^9.0.3
+  firebase_auth: ^4.7.2
+  firebase_core: ^2.15.0
+  firebase_messaging: ^14.7.10
+  flutter:
+    sdk: flutter
+  flutter_launcher_icons: ^0.13.1
+  flutter_local_notifications: ^16.3.1+1
+  google_sign_in: ^6.1.4
+  http: ^0.13.6
+  intl: ^0.18.1
+  loading_indicator: ^3.1.1
+  lottie: ^2.3.2
+  mailer: ^6.0.1
+  messaging: ^0.2.1
+  provider: ^6.0.5
+  search_page: ^2.3.0
+  shared_preferences: ^2.2.2
+  url_launcher: ^6.1.11
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+  flutter_lints: ^2.0.2
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/images/
+
+    - assets/lotties/
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/poppins/Poppins-Bold.ttf
+    #       - asset: fonts/Schyler-Italic.ttf
+    #         style: italic
+    - family: Ninja Naruto
+      fonts:
+        - asset: assets/fonts/naruto/njnaruto.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages
+flutter_icons:
+  image_path: "assets/images/0.jpg"
+  android: true
+  ios: true
