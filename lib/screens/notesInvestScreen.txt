@@ -1,266 +1,40 @@
-class InvestissementScreen extends StatefulWidget {
-  const InvestissementScreen({super.key});
-  static const routeName = 'Investissement';
+ int MontantMax = 2000;
+  String? _numero;
+  String? _nomCompte;
+  int? _montant;
+  String? _whatsapp;
 
-  @override
-  State<InvestissementScreen> createState() => _InvestissementScreenState();
-}
 
-class _InvestissementScreenState extends State<InvestissementScreen> {
-  bool _isAllTermsChecked = false;
 
-  void _onCheckboxChanged(bool value) {
-    setState(() {
-      _isAllTermsChecked = value;
+  Future<void> _addRetraitToFirestore() async {
+    CollectionReference transactions =
+        FirebaseFirestore.instance.collection('transactions');
+    String id = generateId();
+
+    await transactions.doc(id).set({
+      'NumOM_MOMO': _numero,
+      'date': Timestamp.fromDate(DateTime.now()),
+      'emailUtilisateur': getUserEmail(),
+      'montant': _montant,
+      'nomCompte': _nomCompte,
+      'type': 'retrait',
+      'whatsapp': _whatsapp,
+    });
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Retrait enregistré avec succès!'),
+        backgroundColor: Colors.green,
+      ),
+    );
+    showModalBottomSheet(
+        isScrollControlled: true,
+        context: context,
+        isDismissible: false,
+        builder: (BuildContext context) {
+          return const Splash_screen_info(); // votre page de chargement
+        });
+    await Future.delayed(const Duration(seconds: 5), () {
+      Navigator.of(context).pop(); // fermer la feuille
     });
   }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Menu d\'investissement',
-            style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-                fontFamily: 'Poppins',
-                color: Color.fromARGB(255, 0, 0, 0))),
-        backgroundColor: Colors.amber,
-      ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: _HeroWidget(),
-              ),
-              const SizedBox(height: 16),
-              Divider(),
-              // Texte explicatif sur l'investissement
-              Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      width: 900,
-                      height: 98,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            colors: [
-                              const Color.fromARGB(255, 216, 163, 3),
-                              Colors.amber,
-                              Colors.yellow
-                            ],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter),
-                        borderRadius: BorderRadius.circular(21),
-                        border: Border.all(
-                          color: Colors.black87,
-                          width: 2,
-                        ),
-                        color: Colors.amber,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Text(
-                              textAlign: TextAlign.center,
-                              "DERNIERE TRANSACTION",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w700,
-                                  fontFamily: 'Poppins',
-                                  color: Colors.white70),
-                            ),
-                            Text(
-                              textAlign: TextAlign.center,
-                              "INVESTISSEMENT",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w700,
-                                  fontFamily: 'Poppins',
-                                  color: Colors.green),
-                            ),
-                            Text(
-                              textAlign: TextAlign.center,
-                              "3000 XAF",
-                              style: TextStyle(
-                                  fontSize: 26,
-                                  fontWeight: FontWeight.w700,
-                                  fontFamily: 'Poppins',
-                                  color: Color.fromARGB(255, 0, 0, 0)),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      textAlign: TextAlign.center,
-                      "Bienvenue dans la section investissement de CryptAfri, nous vous invitons avant toute chose a lire attentivement notre contrat d'investissement.",
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: 'Poppins',
-                          color: Colors.black54),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: const Text('CONTRAT D\'INVESTISSEMENT',
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: 'Poppins',
-                            color: Color.fromARGB(255, 255, 255, 255))),
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                        Color.fromARGB(156, 235, 3, 3),
-                      ),
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Divider(),
-              const SizedBox(height: 3),
-              ElevatedButton(
-                onPressed: () {
-                  _showModalBottomSheet(context);
-                },
-                child: const Text('INVESTIR',
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'Poppins',
-                        color: Colors.white)),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
-                    Colors.amber,
-                  ),
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(22),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-            ],
-          ),
-        ),
-      ),
-      drawer: Drawer(
-        backgroundColor: Color.fromARGB(255, 235, 158, 3),
-        child: Column(
-          children: [
-            Container(
-              height: 120.0,
-              child: CircleAvatar(
-                radius: 60.0,
-                backgroundImage: AssetImage(
-                  // L'URL de la photo de profil
-                  'assets/images/0.jpg',
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  void _showModalBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      backgroundColor: Colors.black87,
-      context: context,
-      builder: (BuildContext context) {
-        return StatefulBuilder(
-          builder: (BuildContext context, StateSetter setModalState) {
-            return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Termes et conditions',
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w900,
-                        fontFamily: 'Poppins',
-                        color: Colors.white),
-                  ),
-                  const SizedBox(height: 16),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: 3,
-                      itemBuilder: (context, index) {
-                        return Column(
-                          children: [
-                            Divider(),
-                            CheckboxListTile(
-                              title: Text(
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w700,
-                                      fontFamily: 'Poppins',
-                                      color: Colors.white),
-                                  'Terme je suis un terme ou une condition et tu dois d\'abord m\'accepter pour investir ${index + 1}'),
-                              value: _isAllTermsChecked,
-                              onChanged: (value) {
-                                setModalState(() {
-                                  _isAllTermsChecked = value!;
-                                });
-                              },
-                            ),
-                            Divider(),
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                  Center(
-                    child: ElevatedButton.icon(
-                      icon: Icon(Icons.check_circle_outline),
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                          _isAllTermsChecked
-                              ? Color.fromARGB(255, 235, 158, 3)
-                              : Colors.grey,
-                        ),
-                        shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                        ),
-                      ),
-                      onPressed: _isAllTermsChecked
-                          ? () => Navigator.pop(context)
-                          : null,
-                      label: const Text(
-                        'Accepter',
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: 'Poppins',
-                            color: Colors.black54),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
-        );
-      },
-    );
-  }
-}

@@ -119,7 +119,12 @@ class _SignInScreenState extends State<SignInScreen>
               ),
             ),
             // Créer un widget CircularProgressIndicator qui s'affiche si l'état de la connexion est vrai
-            if (_isLoading) CircularProgressIndicator(),
+            if (_isLoading)
+              SizedBox(
+                child: CircularProgressIndicator(),
+                height: 50,
+                width: 50,
+              ),
             Form(
               // Passer la clé globale au paramètre key
               key: _formKey,

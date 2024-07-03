@@ -23,6 +23,7 @@ class InvestissementScreen extends StatefulWidget {
 
 class _InvestissementScreenState extends State<InvestissementScreen> {
   final List<bool> _termsChecked = [false, false, false];
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   void _onCheckboxChanged(int index, bool value) {
     setState(() {
@@ -40,6 +41,8 @@ class _InvestissementScreenState extends State<InvestissementScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(58, 255, 193, 7),
+      key: scaffoldKey,
       appBar: AppBar(
         title: const Text(
           'Menu d\'investissement',
@@ -52,85 +55,100 @@ class _InvestissementScreenState extends State<InvestissementScreen> {
         ),
         backgroundColor: Colors.amber,
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              const Padding(
-                padding: EdgeInsets.all(2.0),
-                child: _HeroWidget(),
-              ),
-              const SizedBox(height: 10),
-              const Divider(),
-              _ExplanationText(onPressed: () {
-                Scaffold.of(context).openDrawer();
-              }),
-              const Divider(),
-              const SizedBox(height: 5),
-              _InvestButton(onPressed: () {
-                _showModalBottomSheet(context);
-              }),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  width: 900,
-                  height: 98,
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(colors: [
-                      Color.fromARGB(255, 216, 163, 3),
-                      Colors.amber,
-                      Colors.yellow
-                    ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
-                    borderRadius: BorderRadius.circular(21),
-                    border: Border.all(
-                      color: Colors.black87,
-                      width: 2,
+      body: Container(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(2.0),
+                  child: _HeroWidget(),
+                ),
+                const SizedBox(height: 10),
+                _ExplanationText(onPressed: () {
+                  scaffoldKey.currentState!.openDrawer();
+                }),
+                const Divider(),
+                const SizedBox(height: 5),
+                _InvestButton(onPressed: () {
+                  _showModalBottomSheet(context);
+                }),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    width: 900,
+                    height: 125,
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                          colors: [
+                            Color.fromARGB(255, 216, 163, 3),
+                            Colors.amber,
+                            Colors.yellow
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter),
+                      borderRadius: BorderRadius.circular(21),
+                      border: Border.all(
+                        color: Colors.black87,
+                        width: 2,
+                      ),
+                      color: Colors.amber,
                     ),
-                    color: Colors.amber,
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Text(
-                          textAlign: TextAlign.center,
-                          "DERNIERE TRANSACTION",
-                          style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: 'Poppins',
-                              color: Colors.white70),
-                        ),
-                        Text(
-                          textAlign: TextAlign.center,
-                          "INVESTISSEMENT",
-                          style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: 'Poppins',
-                              color: Colors.green),
-                        ),
-                        Text(
-                          textAlign: TextAlign.center,
-                          "3000 XAF",
-                          style: TextStyle(
-                              fontSize: 26,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: 'Poppins',
-                              color: Color.fromARGB(255, 0, 0, 0)),
-                        ),
-                      ],
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            textAlign: TextAlign.center,
+                            "DERNIERE TRANSACTION",
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: 'Poppins',
+                                color: Colors.white70),
+                          ),
+                          Text(
+                            textAlign: TextAlign.center,
+                            "INVESTISSEMENT",
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: 'Poppins',
+                                color: Colors.green),
+                          ),
+                          Text(
+                            textAlign: TextAlign.center,
+                            "3000 XAF",
+                            style: TextStyle(
+                                fontSize: 26,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: 'Poppins',
+                                color: Color.fromARGB(255, 0, 0, 0)),
+                          ),
+                          Text(
+                            textAlign: TextAlign.center,
+                            "Valide",
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: 'Poppins',
+                                color: Colors.green),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 16),
-            ],
+                const SizedBox(height: 16),
+              ],
+            ),
           ),
         ),
       ),
       drawer: Drawer(
+        shape:
+            BeveledRectangleBorder(borderRadius: BorderRadius.all(Radius.zero)),
         backgroundColor: const Color.fromARGB(255, 235, 158, 3),
         child: ListView(
           padding: EdgeInsets.zero,
@@ -151,28 +169,41 @@ class _InvestissementScreenState extends State<InvestissementScreen> {
             ),
             Padding(
               padding: EdgeInsets.all(8.0),
-              child: Text(
-                'Contrat d\'Investissement dans la Plateforme Cryptafri\n\n'
-                'Ce contrat d\'investissement régit l\'utilisation des fonds investis sur la plateforme Cryptafri. Avant de procéder à votre investissement, veuillez lire attentivement et comprendre les termes et conditions énoncés ci-dessous. En investissant sur notre plateforme, vous acceptez d\'être lié par les présentes politiques et règles.\n\n'
-                '1. Objectif de l\'investissement :\n'
-                'L\'investissement dans la plateforme Cryptafri n\'implique pas l\'acquisition de parts ou d\'actions de la société Cryptafri. L\'objectif de cet investissement est de générer des revenus récurrents pour les investisseurs grâce aux différentes activités menées par l\'équipe Cryptafri.\n\n'
-                '2. Modalités d\'investissement :\n'
-                'a. Souscription des fonds : En tant qu\'investisseur, vous pouvez placer des fonds sur la plateforme Cryptafri conformément aux modalités spécifiées dans le processus d\'investissement. Le montant minimum d\'investissement et les conditions de paiement seront clairement définis dans le processus de souscription.\n\n'
-                'b. Rendement de l\'investissement : Les investisseurs recevront un intérêt de 4% sur leurs fonds investis, versé de manière hebdomadaire. Ce rendement est garanti par Cryptafri et ne dépend pas des performances de la plateforme.\n\n'
-                'c. Retrait des fonds : Les fonds investis ne sont retirables qu\'après une période de 3 mois à compter de la date d\'investissement. seuls les intérêts pourrons être retirable pendant les 3 premiers mois. Passé ce délai, les investisseurs peuvent retirer leurs fonds investi à tout moment.\n\n'
-                'Exemple de distribution des revenus en XAF :\n'
-                '- Montant investi : 1 00 000 XAF\n'
-                '- Intérêt hebdomadaire (4%) : 4000 XAF\n'
-                '- Intérêt versé par semaine (retirable): 4000 XAF\n\n'
-                '3. Responsabilité de Cryptafri :\n'
-                'a. Gestion des fonds : Cryptafri s\'engage à gérer les fonds des investisseurs avec le plus grand soin et à les utiliser conformément à l\'objectif de générer des revenus récurrents. Nous nous efforcerons d\'assurer une gestion diligente et responsable des fonds investis.\n\n'
-                'b. Clause de non-responsabilité : Cryptafri ne peut pas garantir à 100% que les rendements prévus seront atteints. La valeur des fonds investis peut être affectée par divers facteurs, y compris les conditions du marché et d\'autres circonstances économiques. Vous comprenez et acceptez que l\'investissement comporte des risques inhérents et que vous êtes seul responsable de vos décisions d\'investissement.',
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w400,
-                  fontFamily: 'Poppins',
-                  color: Colors.black87,
-                ),
+              child: Column(
+                children: [
+                  Text(
+                    'Contrat d\'Investissement dans la Plateforme Cryptafri\n',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black87,
+                      fontFamily: 'Poppins',
+                      fontSize: 27,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    'Ce contrat d\'investissement régit l\'utilisation des fonds investis sur la plateforme Cryptafri. Avant de procéder à votre investissement, veuillez lire attentivement et comprendre les termes et conditions énoncés ci-dessous. En investissant sur notre plateforme, vous acceptez d\'être lié par les présentes politiques et règles.\n\n'
+                    '1. Objectif de l\'investissement :\n'
+                    'L\'investissement dans la plateforme Cryptafri n\'implique pas l\'acquisition de parts ou d\'actions de la société Cryptafri. L\'objectif de cet investissement est de générer des revenus récurrents pour les investisseurs grâce aux différentes activités menées par l\'équipe Cryptafri.\n\n'
+                    '2. Modalités d\'investissement :\n'
+                    'a. Souscription des fonds : En tant qu\'investisseur, vous pouvez placer des fonds sur la plateforme Cryptafri conformément aux modalités spécifiées dans le processus d\'investissement. Le montant minimum d\'investissement et les conditions de paiement seront clairement définis dans le processus de souscription.\n\n'
+                    'b. Rendement de l\'investissement : Les investisseurs recevront un intérêt de 4% sur leurs fonds investis, versé de manière hebdomadaire. Ce rendement est garanti par Cryptafri et ne dépend pas des performances de la plateforme.\n\n'
+                    'c. Retrait des fonds : Les fonds investis ne sont retirables qu\'après une période de 3 mois à compter de la date d\'investissement. seuls les intérêts pourrons être retirable pendant les 3 premiers mois. Passé ce délai, les investisseurs peuvent retirer leurs fonds investi à tout moment.\n\n'
+                    'Exemple de distribution des revenus en XAF :\n'
+                    '- Montant investi : 1 00 000 XAF\n'
+                    '- Intérêt hebdomadaire (4%) : 4000 XAF\n'
+                    '- Intérêt versé par semaine (retirable): 4000 XAF\n\n'
+                    '3. Responsabilité de Cryptafri :\n'
+                    'a. Gestion des fonds : Cryptafri s\'engage à gérer les fonds des investisseurs avec le plus grand soin et à les utiliser conformément à l\'objectif de générer des revenus récurrents. Nous nous efforcerons d\'assurer une gestion diligente et responsable des fonds investis.\n\n'
+                    'b. Clause de non-responsabilité : Cryptafri ne peut pas garantir à 100% que les rendements prévus seront atteints. La valeur des fonds investis peut être affectée par divers facteurs, y compris les conditions du marché et d\'autres circonstances économiques. Vous comprenez et acceptez que l\'investissement comporte des risques inhérents et que vous êtes seul responsable de vos décisions d\'investissement.',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w400,
+                      fontFamily: 'Poppins',
+                      color: Colors.black87,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
@@ -249,7 +280,7 @@ class _InvestissementScreenState extends State<InvestissementScreen> {
                         ),
                       ),
                       onPressed: _isAllTermsChecked
-                          ? () => Navigator.pushNamed(context, 'HomeScreen')
+                          ? () => Navigator.pushNamed(context, 'splash_invest')
                           : null,
                       label: const Text(
                         'Accepter',

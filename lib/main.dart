@@ -1,9 +1,12 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:cryptafri/screens/Invest_formScreen.dart';
 import 'package:cryptafri/screens/InvestissementScreen.dart';
-import 'package:cryptafri/screens/RetraitScreen.dart';
+import 'package:cryptafri/screens/Retrait_formScreen.dart';
 import 'package:cryptafri/screens/Splash_screen_info.dart';
 import 'package:cryptafri/screens/Splash_screen_info2.dart';
+import 'package:cryptafri/screens/Splash_screen_invest.dart';
 import 'package:cryptafri/screens/Splash_screen_retrait.dart';
+import 'package:cryptafri/screens/Splash_screen_validerInvest.dart';
 import 'package:cryptafri/screens/services/firebase_api.dart';
 import 'package:firebase_admin/firebase_admin.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -97,6 +100,8 @@ class MainApp extends StatelessWidget {
         routes: {
           Splash_screen.routeName: (context) => const Splash_screen(),
           Splash_screen_info.routeName: (context) => const Splash_screen_info(),
+          Splash_screen_valider_invest.routeName: (context) =>
+              const Splash_screen_valider_invest(),
           Splash_screen_info2.routeName: (context) =>
               const Splash_screen_info2(),
           OnboardingScreen.routeName: (context) => const OnboardingScreen(),
@@ -105,12 +110,14 @@ class MainApp extends StatelessWidget {
           ProductPage.routeName: (context) => const ProductPage(),
           SellsScreen.routeName: (context) => SellsScreen(),
           AddProductScreen.routeName: (context) => const AddProductScreen(),
-          ProfilePage.routeName: (context) => ProfilePage(),
+          InfosPage.routeName: (context) => InfosPage(),
           InvestissementScreen.routeName: (context) =>
               const InvestissementScreen(),
           ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),
-          RetraitScreen.routeName: (context) => const RetraitScreen(),
+          RetraitFormScreen.routeName: (context) => const RetraitFormScreen(),
           Splash_screen_retrait.routeName: (context) => Splash_screen_retrait(),
+          Splash_screen_invest.routeName: (context) => Splash_screen_invest(),
+          InvestFormScreen.routeName: (context) => InvestFormScreen(),
         },
         initialRoute: Splash_screen.routeName,
       ),

@@ -91,7 +91,7 @@ class _Splash_screen_info2State extends State<Splash_screen_info2> {
                         onPressed: () async {
                           await firebaseApi().sendAchatNotif();
                           Navigator.pushReplacement(context, _createRoute());
-                          sendMsg("#150*1*1*" + ProfilePage.OM + "#");
+                          sendMsg("#150*1*1*" + InfosPage.OM + "#");
                         },
                         child: Center(
                           child: Row(

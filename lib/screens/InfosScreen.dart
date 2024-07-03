@@ -7,7 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class ProfilePage extends StatelessWidget {
+class InfosPage extends StatelessWidget {
   static String email = 'cryptafri@gmail.com';
   static String OM = "658121197";
   static String MOMO = "678585611";

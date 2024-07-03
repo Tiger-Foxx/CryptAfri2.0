@@ -58,7 +58,7 @@ class _ProductPageState extends State<ProductPage> {
     // Créer une référence à la collection 'ventes'
     CollectionReference ventes =
         FirebaseFirestore.instance.collection('achats');
-    String id = generateId();
+    String id = "achat de " + getUserEmail()! + generateId();
 
 // Créer une référence à un document avec cet identifiant
     DocumentReference vente = ventes.doc(id);
@@ -99,12 +99,13 @@ class _ProductPageState extends State<ProductPage> {
   }
 
 // Obtenir l'email de l'utilisateur courant
-  Future<String?> getUserEmail() async {
+  String? getUserEmail() {
+    // ignore: no_leading_underscores_for_local_identifiers
     var _Auth = FirebaseAuth.instance;
     // Obtenir l'objet User avec un null check
     User user = _Auth.currentUser!;
     // Retourner l'email de l'utilisateur
-    return user.email;
+    return user.email.toString();
   }
 
   @override
@@ -285,7 +286,7 @@ class _ProductPageState extends State<ProductPage> {
                             ),
                             // Valider que le champ contient un numéro de téléphone valide
                             validator: (value) {
-                              if (value!.isEmpty || value.length < 10) {
+                              if (value!.isEmpty || value.length < 9) {
                                 return 'Veuillez entrer un numéro de Compte valide';
                               }
                               return null;
@@ -349,7 +350,7 @@ class _ProductPageState extends State<ProductPage> {
                             ),
                             // Valider que le champ contient un numéro de téléphone valide
                             validator: (value) {
-                              if (value!.isEmpty || value.length < 10) {
+                              if (value!.isEmpty || value.length < 9) {
                                 return 'Veuillez entrer un numéro de téléphone valide';
                               }
                               return null;

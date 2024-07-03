@@ -9,21 +9,26 @@ import 'InfosScreen.dart';
 import 'SearchPage.dart';
 
 class MainScreenPage extends StatefulWidget {
-  const MainScreenPage({super.key});
+  const MainScreenPage(
+      {super.key,
+      this.param = 0}); // Paramètre optionnel avec valeur par défaut 0
+  final int param;
   static final String routeName = 'main';
 
   @override
-  State<MainScreenPage> createState() => _MainScreenPageState();
+  State<MainScreenPage> createState() =>
+      _MainScreenPageState(currentIndex: param);
 }
 
 class _MainScreenPageState extends State<MainScreenPage> {
+  _MainScreenPageState({this.currentIndex = 0});
   @override
-  int _currentIndex = 0;
+  int currentIndex;
   final pages = [
     const HomeScreen(),
     const AddProductScreen(),
-    ProfilePage(),
     const InvestissementScreen(),
+    InfosPage(),
   ];
 
   Widget build(BuildContext context) {
@@ -35,9 +40,9 @@ class _MainScreenPageState extends State<MainScreenPage> {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         iconSize: 28,
-        currentIndex: _currentIndex, // the index of the current icon
+        currentIndex: currentIndex ?? 0, // the index of the current icon
         onTap: (index) {
-          setState(() => _currentIndex = index);
+          setState(() => currentIndex = index);
         },
         showUnselectedLabels: false,
         selectedItemColor: Color.fromARGB(255, 231, 179, 7),
@@ -52,17 +57,18 @@ class _MainScreenPageState extends State<MainScreenPage> {
             icon: Icon(Icons.sell),
             label: 'vendre',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.info),
-            label: 'informations',
-          ),
+
           BottomNavigationBarItem(
             icon: Icon(Icons.account_balance_rounded),
             label: 'Investissement',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.info),
+            label: 'informations',
+          ),
         ],
       ),
-      body: pages[_currentIndex],
+      body: pages[currentIndex],
     );
   }
 }

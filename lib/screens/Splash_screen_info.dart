@@ -27,72 +27,74 @@ class _Splash_screen_infoState extends State<Splash_screen_info> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: Color.fromARGB(255, 42, 42, 43),
-        child: Center(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 10.0,
-              ),
-              Lottie.asset('assets/lotties/bitcoin1.json', height: 200),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    Text(
-                      "POUR FINALISER VOTRE TRANSACTION,\n VOUS DEVEZ CLIQUER SUR VALIDER , PUIS , EFFECTUER LE DEPOT SUR NOTRE RESEAU D'EMSSION QUE VOUS AVEZ CHOISI\n (les addresses sont aussi disponibles dans la section INFO)",
-                      style: TextStyle(
-                        color: Colors.white54,
-                        fontFamily: 'Poppins',
-                      ),
-                      overflow: TextOverflow.visible,
-                      softWrap: true,
-                      textAlign: TextAlign.center,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Text(
-                        "Copiez l'addresse du reseau que vous avez Choisi (" +
-                            AddProductScreen.portefName +
-                            ")",
+      body: SingleChildScrollView(
+        child: Container(
+          color: Color.fromARGB(255, 42, 42, 43),
+          child: Center(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 10.0,
+                ),
+                Lottie.asset('assets/lotties/bitcoin1.json', height: 200),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Text(
+                        "POUR FINALISER VOTRE TRANSACTION,\n VOUS DEVEZ CLIQUER SUR VALIDER , PUIS , EFFECTUER LE DEPOT SUR NOTRE RESEAU D'EMSSION QUE VOUS AVEZ CHOISI\n (les addresses sont aussi disponibles dans la section INFO)",
                         style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
+                          color: Colors.white54,
+                          fontFamily: 'Poppins',
                         ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: CopyableTextButton(AddProductScreen.portef),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Text(
-                        "Veuillez vérifier que votre réseau d'émission est << " +
-                            AddProductScreen.portefName +
-                            " >> avant de valider ",
-                        style: TextStyle(
-                            color: const Color.fromARGB(255, 255, 7, 7),
-                            fontFamily: 'Poppins',
-                            fontSize: 17),
                         overflow: TextOverflow.visible,
                         softWrap: true,
                         textAlign: TextAlign.center,
                       ),
-                    ),
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Text(
+                          "Copiez l'addresse du reseau que vous avez Choisi (" +
+                              AddProductScreen.portefName +
+                              ")",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: CopyableTextButton(AddProductScreen.portef),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Text(
+                          "Veuillez vérifier que votre réseau d'émission est << " +
+                              AddProductScreen.portefName +
+                              " >> avant de valider ",
+                          style: TextStyle(
+                              color: const Color.fromARGB(255, 255, 7, 7),
+                              fontFamily: 'Poppins',
+                              fontSize: 17),
+                          overflow: TextOverflow.visible,
+                          softWrap: true,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(height: 8.0),
-              ElevatedButton(
-                onPressed: () async {
-                  Navigator.pushReplacement(context, _createRoute());
-                  await firebaseApi().sendVenteNotif();
-                },
-                child: Text('Valider'),
-              ),
-            ],
+                SizedBox(height: 8.0),
+                ElevatedButton(
+                  onPressed: () async {
+                    Navigator.pushReplacement(context, _createRoute());
+                    await firebaseApi().sendVenteNotif();
+                  },
+                  child: Text('Valider'),
+                ),
+              ],
+            ),
           ),
         ),
       ),

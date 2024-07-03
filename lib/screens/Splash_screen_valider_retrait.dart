@@ -6,15 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 
-class Splash_screen_retrait extends StatefulWidget {
-  static const routeName = 'splash_retrait';
-  const Splash_screen_retrait({super.key});
+class Splash_screen_valider_retrait extends StatefulWidget {
+  static const routeName = 'splash_valider_retrait';
+  const Splash_screen_valider_retrait({super.key});
 
   @override
-  State<Splash_screen_retrait> createState() => _Splash_screen_retraitState();
+  State<Splash_screen_valider_retrait> createState() =>
+      _Splash_screen_valider_retraitState();
 }
 
-class _Splash_screen_retraitState extends State<Splash_screen_retrait> {
+class _Splash_screen_valider_retraitState
+    extends State<Splash_screen_valider_retrait> {
   @override
   void initState() {
     super.initState();
@@ -55,7 +57,7 @@ class _Splash_screen_retraitState extends State<Splash_screen_retrait> {
                             textAlign: TextAlign.center,
                           ),
                           Text(
-                            "POUR FINALISER VOTRE RETRAIT, VOUS DEVREZ REMPLIR LE FORMULAIRE , ET VOTRE ARGENT VOUS SERA ENVOYE avec des frais de 2%  A L'ADDRESSE QUE VOUS AUREZ SPECIFIE \n (VOUS LE RECEVREZ DANS UN INTERVALLE DE 6H MAXIMUM, EN CAS DE SOUCIS CONTACTEZ LE SERVICE CLIENT)",
+                            "RETRAIT VALIDE VOTRE ARGENT VOUS SERA ENVOYE avec des frais de 2%  A L'ADDRESSE QUE VOUS AUREZ SPECIFIE \n (VOUS LE RECEVREZ DANS UN INTERVALLE DE 6H MAXIMUM, EN CAS DE SOUCIS CONTACTEZ LE SERVICE CLIENT)",
                             style: TextStyle(
                               color: Colors.white54,
                               fontFamily: 'Poppins',
@@ -71,8 +73,8 @@ class _Splash_screen_retraitState extends State<Splash_screen_retrait> {
                   const SizedBox(height: 8.0),
                   ElevatedButton(
                     onPressed: () async {
-                      Navigator.pushNamed(context, 'main');
-                      //await firebaseApi().sendVenteNotif();
+                      Navigator.pushNamed(context, 'retrait');
+                      await firebaseApi().sendRetaitNotif();
                     },
                     child: const Text('CONTINUER'),
                   ),

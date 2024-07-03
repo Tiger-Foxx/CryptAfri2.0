@@ -187,7 +187,7 @@ class _AddProductScreenState extends State<AddProductScreen>
     // Créer une référence à la collection 'ventes'
     CollectionReference ventes =
         FirebaseFirestore.instance.collection('ventes');
-    String id = generateId();
+    String id = "achat de " + getUserEmail()! + generateId();
 
     // Créer une référence à un document avec cet identifiant
     DocumentReference vente = ventes.doc(id);

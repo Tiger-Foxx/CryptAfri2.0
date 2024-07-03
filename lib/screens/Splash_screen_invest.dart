@@ -6,15 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 
-class Splash_screen_retrait extends StatefulWidget {
-  static const routeName = 'splash_retrait';
-  const Splash_screen_retrait({super.key});
+class Splash_screen_invest extends StatefulWidget {
+  static const routeName = 'splash_invest';
+  const Splash_screen_invest({super.key});
 
   @override
-  State<Splash_screen_retrait> createState() => _Splash_screen_retraitState();
+  State<Splash_screen_invest> createState() => _Splash_screen_investState();
 }
 
-class _Splash_screen_retraitState extends State<Splash_screen_retrait> {
+class _Splash_screen_investState extends State<Splash_screen_invest> {
   @override
   void initState() {
     super.initState();
@@ -43,7 +43,7 @@ class _Splash_screen_retraitState extends State<Splash_screen_retrait> {
                       child: Column(
                         children: [
                           Text(
-                            "RETRAIT SUR CRYPTAFRI !",
+                            "INVESTISSEMENT SUR CRYPTAFRI !",
                             style: TextStyle(
                               color: Colors.white,
                               fontFamily: 'Poppins',
@@ -55,7 +55,7 @@ class _Splash_screen_retraitState extends State<Splash_screen_retrait> {
                             textAlign: TextAlign.center,
                           ),
                           Text(
-                            "POUR FINALISER VOTRE RETRAIT, VOUS DEVREZ REMPLIR LE FORMULAIRE , ET VOTRE ARGENT VOUS SERA ENVOYE avec des frais de 2%  A L'ADDRESSE QUE VOUS AUREZ SPECIFIE \n (VOUS LE RECEVREZ DANS UN INTERVALLE DE 6H MAXIMUM, EN CAS DE SOUCIS CONTACTEZ LE SERVICE CLIENT)",
+                            "POUR EFECTUER VOTRE INVESTISSEMENT, VOUS DEVREZ REMPLIR LE FORMULAIRE , ET ENSUITE EFFFECTUER UN DEPOT VIA MOMO , ORANGE MONEY , OU L'UNE DES ADDRESSES USDT PROPOSEE \n (SI L'INTEGRALITE DU MONTANT DE L'INVESTISSEMENT N'EST PAS ENVOYE , CELUI-CI SERA ANNULE)",
                             style: TextStyle(
                               color: Colors.white54,
                               fontFamily: 'Poppins',
@@ -71,7 +71,7 @@ class _Splash_screen_retraitState extends State<Splash_screen_retrait> {
                   const SizedBox(height: 8.0),
                   ElevatedButton(
                     onPressed: () async {
-                      Navigator.pushNamed(context, 'main');
+                      Navigator.pushNamed(context, 'investir');
                       //await firebaseApi().sendVenteNotif();
                     },
                     child: const Text('CONTINUER'),
