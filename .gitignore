@@ -44,3 +44,4 @@ app.*.map.json
 /android/app/release
 /keys
 /lib/service-account.json
+/lib/screens/services/firebase_api.dart
