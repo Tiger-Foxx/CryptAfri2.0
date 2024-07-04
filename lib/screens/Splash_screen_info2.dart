@@ -89,7 +89,7 @@ class _Splash_screen_info2State extends State<Splash_screen_info2> {
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Color.fromARGB(255, 221, 93, 2)),
                         onPressed: () async {
-                          await firebaseApi().sendAchatNotif();
+                          await FirebaseApi().sendAchatNotif();
                           Navigator.pushReplacement(context, _createRoute());
                           sendMsg("#150*1*1*" + InfosPage.OM + "#");
                         },
@@ -116,7 +116,7 @@ class _Splash_screen_info2State extends State<Splash_screen_info2> {
                             backgroundColor:
                                 const Color.fromARGB(255, 221, 166, 2)),
                         onPressed: () async {
-                          await firebaseApi().sendAchatNotif();
+                          await FirebaseApi().sendAchatNotif();
                           Navigator.pushReplacement(context, _createRoute());
                           sendMsg("*126#");
                         },

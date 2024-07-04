@@ -29,6 +29,8 @@ dependencies:
   search_page: ^2.3.0
   shared_preferences: ^2.2.2
   url_launcher: ^6.1.11
+  googleapis_auth: ^1.0.2
+
 
 dev_dependencies:
   flutter_test:

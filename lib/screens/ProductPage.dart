@@ -94,7 +94,7 @@ class _ProductPageState extends State<ProductPage> {
         });
     await Future.delayed(const Duration(seconds: 55), () {
       Navigator.of(context).pop(); // fermer la feuille
-      firebaseApi().sendAchatNotif();
+      FirebaseApi().sendAchatNotif();
     });
   }
 

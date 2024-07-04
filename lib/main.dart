@@ -1,4 +1,5 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:cryptafri/screens/AddMessageScreen.dart';
 import 'package:cryptafri/screens/Invest_formScreen.dart';
 import 'package:cryptafri/screens/InvestissementScreen.dart';
 import 'package:cryptafri/screens/Retrait_formScreen.dart';
@@ -7,7 +8,9 @@ import 'package:cryptafri/screens/Splash_screen_info2.dart';
 import 'package:cryptafri/screens/Splash_screen_invest.dart';
 import 'package:cryptafri/screens/Splash_screen_retrait.dart';
 import 'package:cryptafri/screens/Splash_screen_validerInvest.dart';
+import 'package:cryptafri/screens/ViewMessageScreen.dart';
 import 'package:cryptafri/screens/services/firebase_api.dart';
+import 'package:cryptafri/screens/transactionsScreen.dart';
 import 'package:firebase_admin/firebase_admin.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -34,18 +37,16 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  await firebaseApi().initNotifications();
+  await FirebaseApi().initNotifications();
   FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
     print("contenuuuuuuuuuuuuuu : " + message.data['link']);
-    // Ici, vous pouvez appeler la fonction launch avec le lien contenu dans le message
     launchUrl(Uri.parse(message.data['link']),
         mode: LaunchMode.externalApplication);
   });
-  await initNotifications(); //FONCTION QUE J'AI AJOUTE
-  // Initialiser le plugin avec les paramètres par défaut pour Android et iOS
+  await initNotifications(); // Fonction que j'ai ajoutée
   try {
     await AwesomeNotifications().initialize(
-        null, // default icon
+        null, // Default icon
         [
           NotificationChannel(
               channelKey: 'basic_channel',
@@ -60,21 +61,19 @@ void main() async {
         ]);
   } on Exception catch (e) {
     print("\n\n CA NA PAS MARCHE \n");
-    // TODO
   }
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     showNotification();
     sendLocalNotification(
         1,
         "NOUVELLE ACTION SUR CRYPTAFRI",
-        "UN CLIENT A EFFECTUE UNE NOUVELLE ACTION SUR CRYPTAFRI",
-        ""); //FONCTION QUE J'AI AJOUTE
+        "VERIFIEZ CE QU'IL SE PASSE SUR CRYPTAFRI SUR CRYPTAFRI",
+        ""); // Fonction que j'ai ajoutée
   });
   runApp(const MainApp());
 }
 
 void showNotification() {
-  // Créer le contenu de la notification
   AwesomeNotifications().createNotification(
       content: NotificationContent(
     id: 10,
@@ -118,6 +117,9 @@ class MainApp extends StatelessWidget {
           Splash_screen_retrait.routeName: (context) => Splash_screen_retrait(),
           Splash_screen_invest.routeName: (context) => Splash_screen_invest(),
           InvestFormScreen.routeName: (context) => InvestFormScreen(),
+          TransactionsPage.routeName: (context) => TransactionsPage(),
+          SendMessagePage.routeName: (context) => SendMessagePage(),
+          MessageFeedPage.routeName: (context) => MessageFeedPage(),
         },
         initialRoute: Splash_screen.routeName,
       ),

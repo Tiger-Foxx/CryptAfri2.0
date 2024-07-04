@@ -1,5 +1,8 @@
+import 'package:cryptafri/screens/AddMessageScreen.dart';
 import 'package:cryptafri/screens/InvestissementScreen.dart';
+import 'package:cryptafri/screens/ViewMessageScreen.dart';
 import 'package:cryptafri/screens/services/firebase_api.dart';
+import 'package:cryptafri/screens/transactionsScreen.dart';
 import 'package:flutter/material.dart';
 import 'AddProductScreen.dart';
 import 'SellsScreen.dart';
@@ -28,12 +31,15 @@ class _MainScreenPageState extends State<MainScreenPage> {
     const HomeScreen(),
     const AddProductScreen(),
     const InvestissementScreen(),
+    TransactionsPage(),
+    SendMessagePage(),
+    MessageFeedPage(),
     InfosPage(),
   ];
 
   Widget build(BuildContext context) {
     try {
-      firebaseApi().initNotifications();
+      FirebaseApi().initNotifications();
     } on Exception catch (e) {
       // TODO
     }
@@ -55,7 +61,7 @@ class _MainScreenPageState extends State<MainScreenPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.sell),
-            label: 'vendre',
+            label: 'Vendre',
           ),
 
           BottomNavigationBarItem(
@@ -63,8 +69,20 @@ class _MainScreenPageState extends State<MainScreenPage> {
             label: 'Investissement',
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.admin_panel_settings),
+            label: 'Transactions',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add),
+            label: 'Message',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.message),
+            label: 'Message',
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.info),
-            label: 'informations',
+            label: 'Informations',
           ),
         ],
       ),

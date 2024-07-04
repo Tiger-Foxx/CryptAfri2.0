@@ -3,7 +3,10 @@
 // import 'package:cryptafri/screens/InfosScreen.dart';
 // import 'package:cryptafri/screens/RetraitScreen.dart';
 // import 'package:cryptafri/screens/Splash_screen_info.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cryptafri/screens/Splash_screen_retrait.dart';
+import 'package:cryptafri/screens/models/transaction.model.dart';
+import 'package:cryptafri/screens/services/fonctions.utiles.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // import 'package:badges/badges.dart' as badges;
@@ -22,8 +25,49 @@ class InvestissementScreen extends StatefulWidget {
 }
 
 class _InvestissementScreenState extends State<InvestissementScreen> {
+  TransactionModel?
+      _latestTransaction; // Variable pour stocker la dernière transaction de l'utilisateur
+
   final List<bool> _termsChecked = [false, false, false];
+  bool _loading = true;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  String _errorMessage = '';
+  @override
+  void initState() {
+    super.initState();
+    _fetchLatestTransaction(); // Récupérer la dernière transaction au démarrage
+  }
+
+  Future<void> _fetchLatestTransaction() async {
+    try {
+      String email = getUserEmail()!;
+      QuerySnapshot snapshot = await FirebaseFirestore.instance
+          .collection('transactions')
+          .where('emailUtilisateur', isEqualTo: email)
+          .orderBy('date', descending: true)
+          .limit(1)
+          .get();
+
+      if (snapshot.docs.isNotEmpty) {
+        setState(() {
+          _latestTransaction =
+              TransactionModel.fromFirestore(snapshot.docs.first);
+          _loading = false;
+        });
+      } else {
+        setState(() {
+          _latestTransaction = null; // Aucun résultat trouvé
+          _loading = false;
+        });
+      }
+    } catch (e) {
+      setState(() {
+        _errorMessage = 'Erreur de chargement des transactions: $e';
+        _loading = false;
+      });
+      print('Erreur de chargement des transactions: $e');
+    }
+  }
 
   void _onCheckboxChanged(int index, bool value) {
     setState(() {
@@ -95,48 +139,66 @@ class _InvestissementScreenState extends State<InvestissementScreen> {
                       ),
                       color: Colors.amber,
                     ),
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Text(
-                            textAlign: TextAlign.center,
-                            "DERNIERE TRANSACTION",
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: 'Poppins',
-                                color: Colors.white70),
-                          ),
-                          Text(
-                            textAlign: TextAlign.center,
-                            "INVESTISSEMENT",
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: 'Poppins',
-                                color: Colors.green),
-                          ),
-                          Text(
-                            textAlign: TextAlign.center,
-                            "3000 XAF",
-                            style: TextStyle(
-                                fontSize: 26,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: 'Poppins',
-                                color: Color.fromARGB(255, 0, 0, 0)),
-                          ),
-                          Text(
-                            textAlign: TextAlign.center,
-                            "Valide",
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: 'Poppins',
-                                color: Colors.green),
-                          ),
-                        ],
-                      ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: _latestTransaction != null
+                          ? Column(
+                              children: [
+                                Text(
+                                  textAlign: TextAlign.center,
+                                  "DERNIERE TRANSACTION",
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w700,
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white70),
+                                ),
+                                Text(
+                                  textAlign: TextAlign.center,
+                                  _latestTransaction!.type.toUpperCase(),
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w700,
+                                      fontFamily: 'Poppins',
+                                      color:
+                                          _latestTransaction!.type == 'retrait'
+                                              ? Colors.red
+                                              : Colors.blue),
+                                ),
+                                Text(
+                                  textAlign: TextAlign.center,
+                                  "${_latestTransaction!.montant} XAF",
+                                  style: TextStyle(
+                                      fontSize: 26,
+                                      fontWeight: FontWeight.w700,
+                                      fontFamily: 'Poppins',
+                                      color: Colors.black),
+                                ),
+                                Text(
+                                  textAlign: TextAlign.center,
+                                  _latestTransaction!.valide
+                                      ? "Valide"
+                                      : "Non validé",
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w700,
+                                      fontFamily: 'Poppins',
+                                      color: _latestTransaction!.valide
+                                          ? Colors.green
+                                          : Colors.red),
+                                ),
+                              ],
+                            )
+                          : Column(
+                              children: [
+                                Center(child: CircularProgressIndicator()),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                      "Votre derniere transaction s'affichera ici "),
+                                )
+                              ],
+                            ),
                     ),
                   ),
                 ),

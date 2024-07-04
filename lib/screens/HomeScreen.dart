@@ -264,22 +264,21 @@ class __HeroWidgetState extends State<_HeroWidget> {
         left: 29,
         child: ElevatedButton(
           onPressed: () async {
-            firebaseApi().sendMessageNotif('je fonctionne');
-            // var message =
-            //     'MESSAGE CRYPTAFRI ! \nASSISTANCE CLIENT\n\n\n\n Bonjour je suis : ';
-            // var number = InfosPage.whatsapp;
-            // // Encoder le message
-            // String encodedMessage = Uri.encodeComponent(message);
+            var message =
+                'MESSAGE CRYPTAFRI ! \nASSISTANCE CLIENT\n\n\n\n Bonjour je suis : ';
+            var number = InfosPage.whatsapp;
+            // Encoder le message
+            String encodedMessage = Uri.encodeComponent(message);
 
-            // // Construire l'URL
-            // String url = 'https://wa.me/$number?text=$encodedMessage';
+            // Construire l'URL
+            String url = 'https://wa.me/$number?text=$encodedMessage';
 
-            // // Lancer l'URL
-            // try {
-            //   launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
-            // } catch (e) {
-            //   print('Could not launch WhatsApp: $e');
-            // }
+            // Lancer l'URL
+            try {
+              launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+            } catch (e) {
+              print('Could not launch WhatsApp: $e');
+            }
           },
           child: Row(
             children: [
@@ -357,7 +356,7 @@ class _ProductsByNetWorkState extends State<ProductsByNetWork> {
                   ),
                 ),
                 onPressed: () {
-                  firebaseApi().sendAchatNotif(); //FONCTION QUE J'AI AJOUTE
+                  FirebaseApi().sendAchatNotif(); //FONCTION QUE J'AI AJOUTE
                 },
               ),
             ],

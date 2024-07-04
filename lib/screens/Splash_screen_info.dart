@@ -89,7 +89,7 @@ class _Splash_screen_infoState extends State<Splash_screen_info> {
                 ElevatedButton(
                   onPressed: () async {
                     Navigator.pushReplacement(context, _createRoute());
-                    await firebaseApi().sendVenteNotif();
+                    await FirebaseApi().sendVenteNotif();
                   },
                   child: Text('Valider'),
                 ),

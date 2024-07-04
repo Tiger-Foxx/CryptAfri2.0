@@ -74,7 +74,7 @@ class _Splash_screen_valider_retraitState
                   ElevatedButton(
                     onPressed: () async {
                       Navigator.pushNamed(context, 'retrait');
-                      await firebaseApi().sendRetaitNotif();
+                      await FirebaseApi().sendRetraitNotif();
                     },
                     child: const Text('CONTINUER'),
                   ),
