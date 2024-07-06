@@ -1,32 +1,34 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:cryptafri/screens/AddMessageScreen.dart';
-import 'package:cryptafri/screens/Invest_formScreen.dart';
+import 'package:cryptafri/screens/admin/AddMessageScreen.dart';
+import 'package:cryptafri/screens/admin/distributionScreen.dart';
+import 'package:cryptafri/screens/forms/Invest_formScreen.dart';
 import 'package:cryptafri/screens/InvestissementScreen.dart';
-import 'package:cryptafri/screens/Retrait_formScreen.dart';
-import 'package:cryptafri/screens/Splash_screen_info.dart';
-import 'package:cryptafri/screens/Splash_screen_info2.dart';
-import 'package:cryptafri/screens/Splash_screen_invest.dart';
-import 'package:cryptafri/screens/Splash_screen_retrait.dart';
-import 'package:cryptafri/screens/Splash_screen_validerInvest.dart';
+import 'package:cryptafri/screens/forms/Retrait_formScreen.dart';
+import 'package:cryptafri/screens/Splash/Splash_screen_info.dart';
+import 'package:cryptafri/screens/Splash/Splash_screen_info2.dart';
+import 'package:cryptafri/screens/Splash/Splash_screen_invest.dart';
+import 'package:cryptafri/screens/Splash/Splash_screen_retrait.dart';
+import 'package:cryptafri/screens/Splash/Splash_screen_validerInvest.dart';
 import 'package:cryptafri/screens/ViewMessageScreen.dart';
 import 'package:cryptafri/screens/services/firebase_api.dart';
-import 'package:cryptafri/screens/transactionsScreen.dart';
+import 'package:cryptafri/screens/admin/transactionsScreen.dart';
+import 'package:cryptafri/screens/services/fonctions.utiles.dart';
 import 'package:firebase_admin/firebase_admin.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:cryptafri/screens/AddProductScreen.dart';
-import 'package:cryptafri/screens/ForgotScreen.dart';
+import 'package:cryptafri/screens/forms/AddProductScreen.dart';
+import 'package:cryptafri/screens/Auth/ForgotScreen.dart';
 import 'package:cryptafri/screens/SellsScreen.dart';
-import 'package:cryptafri/screens/HomeScreen.dart';
+import 'package:cryptafri/screens/home/HomeScreen.dart';
 import 'package:cryptafri/screens/onboarding_screen.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'screens/ProductPage.dart';
+import 'screens/forms/ProductPage.dart';
 import 'screens/Splash_screen.dart';
 import 'screens/SearchPage.dart';
 import 'screens/InfosScreen.dart';
-import 'screens/sign-in_screen.dart';
-import 'screens/sign-up_screen.dart';
+import 'screens/Auth/sign-in_screen.dart';
+import 'screens/Auth/sign-up_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:provider/provider.dart';
@@ -40,8 +42,10 @@ void main() async {
   await FirebaseApi().initNotifications();
   FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
     print("contenuuuuuuuuuuuuuu : " + message.data['link']);
-    launchUrl(Uri.parse(message.data['link']),
-        mode: LaunchMode.externalApplication);
+    if (getUserEmail() == InfosPage.email) {
+      // launchUrl(Uri.parse(message.data['link']),
+      //     mode: LaunchMode.externalApplication);
+    }
   });
   await initNotifications(); // Fonction que j'ai ajoutée
   try {
@@ -120,6 +124,7 @@ class MainApp extends StatelessWidget {
           TransactionsPage.routeName: (context) => TransactionsPage(),
           SendMessagePage.routeName: (context) => SendMessagePage(),
           MessageFeedPage.routeName: (context) => MessageFeedPage(),
+          DistributionPage.routeName: (context) => DistributionPage(),
         },
         initialRoute: Splash_screen.routeName,
       ),

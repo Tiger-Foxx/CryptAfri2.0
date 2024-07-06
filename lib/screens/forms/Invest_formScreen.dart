@@ -4,33 +4,32 @@
 import 'dart:ffi';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cryptafri/screens/Splash_screen_info.dart';
-import 'package:cryptafri/screens/Splash_screen_retrait.dart';
-import 'package:cryptafri/screens/Splash_screen_valider_retrait.dart';
+import 'package:cryptafri/screens/Splash/Splash_screen_info.dart';
+import 'package:cryptafri/screens/Splash/Splash_screen_validerInvest.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:math';
-import 'HomeScreen.dart';
-import 'Splash_screen.dart';
-import 'main_screen_page.dart';
+import '../home/HomeScreen.dart';
+import '../Splash_screen.dart';
+import '../main_screen_page.dart';
 import 'package:lottie/lottie.dart';
 
 // Définir la classe AddProductScreen qui hérite de StatefulWidget
-class RetraitFormScreen extends StatefulWidget {
-  static const routeName = 'retrait';
+class InvestFormScreen extends StatefulWidget {
+  static const routeName = 'investir';
 
   // Créer le constructeur de la classe avec une clé optionnelle
-  const RetraitFormScreen({Key? key}) : super(key: key);
+  const InvestFormScreen({Key? key}) : super(key: key);
 
   // Créer la méthode createState qui retourne une instance de _AddProductScreenState
   @override
-  _RetraitFormScreenState createState() => _RetraitFormScreenState();
+  _InvestFormScreenState createState() => _InvestFormScreenState();
 }
 
 // Définir la classe _AddProductScreenState qui hérite de State<AddProductScreen>
-class _RetraitFormScreenState extends State<RetraitFormScreen>
+class _InvestFormScreenState extends State<InvestFormScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController lottieController;
   @override
@@ -87,35 +86,37 @@ class _RetraitFormScreenState extends State<RetraitFormScreen>
   final _formKey = GlobalKey<FormState>();
 
   // Créer des variables pour stocker les valeurs des champs du formulaire
-  int MontantMax = 2000;
-  String? _numero;
-  String? _nomCompte;
+  int MontantMin = 10000;
+  String? _numero = "";
+  String? _nomCompte = "";
   int? _montant = 0;
   String? _whatsapp;
+  String? _portefeuille = "";
 
   // Créer une variarle booléenne pour indiquer si le vendeur est l'utilisateur courant ou non
   bool _isCurrentUser = false;
 
   // Créer une méthode pour ajouter le produit à la collection Firestore
-  Future<void> _addRetraitToFirestore() async {
+  Future<void> _addInvestissementToFirestore() async {
     CollectionReference transactions =
         FirebaseFirestore.instance.collection('transactions');
-    String id = "retrait de " + getUserEmail()! + generateId();
+    String id = "investissement de " + getUserEmail()! + generateId();
 
     await transactions.doc(id).set({
       'NumOM_MOMO': _numero,
+      'AddressePorteFeuille': _portefeuille,
       'date': Timestamp.fromDate(DateTime.now()),
       'emailUtilisateur': getUserEmail(),
       'montant': _montant,
       'nomCompte': _nomCompte,
-      'type': 'retrait',
-      'whatsapp': _whatsapp,
+      'type': 'investissement',
       'valide': false,
+      'whatsapp': _whatsapp,
     });
-    //showSuccessfulDialog();
+
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('Retrait enregistré avec succès!'),
+        content: Text('Investissement enregistré avec succès!'),
         backgroundColor: Colors.green,
       ),
     );
@@ -124,9 +125,9 @@ class _RetraitFormScreenState extends State<RetraitFormScreen>
         context: context,
         isDismissible: false,
         builder: (BuildContext context) {
-          return const Splash_screen_valider_retrait(); // votre page de chargement
+          return const Splash_screen_valider_invest(); // votre page de chargement
         });
-    await Future.delayed(const Duration(seconds: 100), () {
+    await Future.delayed(const Duration(seconds: 50), () {
       Navigator.pushNamed(context, 'main'); // fermer la feuille
     });
   }
@@ -140,7 +141,7 @@ class _RetraitFormScreenState extends State<RetraitFormScreen>
         backgroundColor: Colors.amber,
         leading: const Icon(Icons.sell),
         title: const Text(
-          'EFFECTUER UN RETRAIT',
+          'EFFECTUER UN IVESTISSEMENT',
           style: TextStyle(fontWeight: FontWeight.w800),
         ),
       ),
@@ -174,7 +175,7 @@ class _RetraitFormScreenState extends State<RetraitFormScreen>
                 const SizedBox(height: 16.0),
                 TextFormField(
                   decoration: const InputDecoration(
-                    labelText: 'Montant que vous voulez Retirer en XAF',
+                    labelText: 'Montant que vous voulez investir en XAF',
                     border: OutlineInputBorder(),
                   ),
                   keyboardType: TextInputType.number,
@@ -182,8 +183,8 @@ class _RetraitFormScreenState extends State<RetraitFormScreen>
                     if (value == null || value.isEmpty) {
                       return 'Veuillez entrer le Montant';
                     }
-                    if (int.parse(value) > MontantMax) {
-                      return 'Votre solde n\'est pas assez grand !';
+                    if (int.parse(value) < MontantMin) {
+                      return 'Vous ne pouvez pas investir moins de ${MontantMin} XAF !';
                     }
                     try {
                       int.parse(value);
@@ -213,16 +214,28 @@ class _RetraitFormScreenState extends State<RetraitFormScreen>
                       color: Color.fromARGB(255, 255, 1, 1)),
                 ),
                 const SizedBox(height: 16.0),
+                Divider(),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "SI VOUS PAYEZ EN XAF",
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w900,
+                        color: Colors.amber),
+                  ),
+                ),
                 TextFormField(
                   keyboardType: TextInputType.phone,
                   decoration: const InputDecoration(
-                    labelText: 'numéro OM/MOMO',
+                    labelText: 'le num de Compte OM-MOMO qui fera le transfert',
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Veuillez entrer votre numero de Compte OM-MOMO';
-                    }
+                    // if (value == null || value.isEmpty) {
+                    //   return 'le de Compte OM-MOMO qui fera le transfert';
+                    // }
                     return null;
                   },
                   onSaved: (value) {
@@ -234,18 +247,50 @@ class _RetraitFormScreenState extends State<RetraitFormScreen>
                 const SizedBox(height: 16.0),
                 TextFormField(
                   decoration: const InputDecoration(
-                    labelText: 'Nom_Compte OM/MOMO',
+                    labelText: 'Le nom de compte OM-MOMO qui fera le transfert',
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Veuillez entrer votre nom de Compte';
-                    }
+                    // if (value == null || value.isEmpty) {
+                    //   return 'Le nom de compte OM-MOMO qui fera le transfert';
+                    // }
                     return null;
                   },
                   onSaved: (value) {
                     setState(() {
                       _nomCompte = value;
+                    });
+                  },
+                ),
+                Divider(),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "SI VOUS PAYEZ EN UDST",
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w900,
+                        color: Colors.amber),
+                  ),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: 'VOTRE ADDRESSE DE PORTEFEUILLE USDT',
+                    border: OutlineInputBorder(),
+                  ),
+                  validator: (value) {
+                    // if (value == null || value.isEmpty) {
+                    //   return 'Le nom de compte OM-MOMO qui fera le transfert';
+                    // }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    setState(() {
+                      _portefeuille = value;
                     });
                   },
                 ),
@@ -258,10 +303,10 @@ class _RetraitFormScreenState extends State<RetraitFormScreen>
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
 
-                      await _addRetraitToFirestore();
+                      await _addInvestissementToFirestore();
                     }
                   },
-                  child: const Text('CONFIRMER LE RETRAIT'),
+                  child: const Text('CONFIRMER L\'INVESTISSEMENT'),
                 ),
               ],
             ),

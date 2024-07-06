@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cryptafri/screens/HomeScreen.dart';
+import 'package:cryptafri/screens/home/HomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:cryptafri/screens/services/firebase_api.dart';
 import 'dart:math';
@@ -61,7 +61,13 @@ class _SendMessagePageState extends State<SendMessagePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Envoyer un Message'),
+        backgroundColor: Colors.amber,
+        title: const Text(
+          'Diffusez un Message',
+          style: TextStyle(
+            fontWeight: FontWeight.w800,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(

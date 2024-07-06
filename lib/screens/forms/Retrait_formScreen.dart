@@ -4,32 +4,33 @@
 import 'dart:ffi';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cryptafri/screens/Splash_screen_info.dart';
-import 'package:cryptafri/screens/Splash_screen_validerInvest.dart';
+import 'package:cryptafri/screens/Splash/Splash_screen_info.dart';
+import 'package:cryptafri/screens/Splash/Splash_screen_retrait.dart';
+import 'package:cryptafri/screens/Splash/Splash_screen_valider_retrait.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:math';
-import 'HomeScreen.dart';
-import 'Splash_screen.dart';
-import 'main_screen_page.dart';
+import '../home/HomeScreen.dart';
+import '../Splash_screen.dart';
+import '../main_screen_page.dart';
 import 'package:lottie/lottie.dart';
 
 // Définir la classe AddProductScreen qui hérite de StatefulWidget
-class InvestFormScreen extends StatefulWidget {
-  static const routeName = 'investir';
+class RetraitFormScreen extends StatefulWidget {
+  static const routeName = 'retrait';
 
   // Créer le constructeur de la classe avec une clé optionnelle
-  const InvestFormScreen({Key? key}) : super(key: key);
+  const RetraitFormScreen({Key? key}) : super(key: key);
 
   // Créer la méthode createState qui retourne une instance de _AddProductScreenState
   @override
-  _InvestFormScreenState createState() => _InvestFormScreenState();
+  _RetraitFormScreenState createState() => _RetraitFormScreenState();
 }
 
 // Définir la classe _AddProductScreenState qui hérite de State<AddProductScreen>
-class _InvestFormScreenState extends State<InvestFormScreen>
+class _RetraitFormScreenState extends State<RetraitFormScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController lottieController;
   @override
@@ -87,36 +88,34 @@ class _InvestFormScreenState extends State<InvestFormScreen>
 
   // Créer des variables pour stocker les valeurs des champs du formulaire
   int MontantMax = 2000;
-  String? _numero = "";
-  String? _nomCompte = "";
+  String? _numero;
+  String? _nomCompte;
   int? _montant = 0;
   String? _whatsapp;
-  String? _portefeuille = "";
 
   // Créer une variarle booléenne pour indiquer si le vendeur est l'utilisateur courant ou non
   bool _isCurrentUser = false;
 
   // Créer une méthode pour ajouter le produit à la collection Firestore
-  Future<void> _addInvestissementToFirestore() async {
+  Future<void> _addRetraitToFirestore() async {
     CollectionReference transactions =
         FirebaseFirestore.instance.collection('transactions');
-    String id = "investissement de " + getUserEmail()! + generateId();
+    String id = "retrait de " + getUserEmail()! + generateId();
 
     await transactions.doc(id).set({
       'NumOM_MOMO': _numero,
-      'AddressePorteFeuille': _portefeuille,
       'date': Timestamp.fromDate(DateTime.now()),
       'emailUtilisateur': getUserEmail(),
       'montant': _montant,
       'nomCompte': _nomCompte,
-      'type': 'investissement',
-      'valide': false,
+      'type': 'retrait',
       'whatsapp': _whatsapp,
+      'valide': false,
     });
-
+    //showSuccessfulDialog();
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('Investissement enregistré avec succès!'),
+        content: Text('Retrait enregistré avec succès!'),
         backgroundColor: Colors.green,
       ),
     );
@@ -125,9 +124,9 @@ class _InvestFormScreenState extends State<InvestFormScreen>
         context: context,
         isDismissible: false,
         builder: (BuildContext context) {
-          return const Splash_screen_valider_invest(); // votre page de chargement
+          return const Splash_screen_valider_retrait(); // votre page de chargement
         });
-    await Future.delayed(const Duration(seconds: 50), () {
+    await Future.delayed(const Duration(seconds: 100), () {
       Navigator.pushNamed(context, 'main'); // fermer la feuille
     });
   }
@@ -141,7 +140,7 @@ class _InvestFormScreenState extends State<InvestFormScreen>
         backgroundColor: Colors.amber,
         leading: const Icon(Icons.sell),
         title: const Text(
-          'EFFECTUER UN IVESTISSEMENT',
+          'EFFECTUER UN RETRAIT',
           style: TextStyle(fontWeight: FontWeight.w800),
         ),
       ),
@@ -175,7 +174,7 @@ class _InvestFormScreenState extends State<InvestFormScreen>
                 const SizedBox(height: 16.0),
                 TextFormField(
                   decoration: const InputDecoration(
-                    labelText: 'Montant que vous voulez investir en XAF',
+                    labelText: 'Montant que vous voulez Retirer en XAF',
                     border: OutlineInputBorder(),
                   ),
                   keyboardType: TextInputType.number,
@@ -183,8 +182,8 @@ class _InvestFormScreenState extends State<InvestFormScreen>
                     if (value == null || value.isEmpty) {
                       return 'Veuillez entrer le Montant';
                     }
-                    if (int.parse(value) < MontantMax) {
-                      return 'Vous ne pouvez pas investir moins de ${MontantMax} !';
+                    if (int.parse(value) > MontantMax) {
+                      return 'Votre solde n\'est pas assez grand !';
                     }
                     try {
                       int.parse(value);
@@ -214,28 +213,16 @@ class _InvestFormScreenState extends State<InvestFormScreen>
                       color: Color.fromARGB(255, 255, 1, 1)),
                 ),
                 const SizedBox(height: 16.0),
-                Divider(),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "SI VOUS PAYEZ EN XAF",
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w900,
-                        color: Colors.amber),
-                  ),
-                ),
                 TextFormField(
                   keyboardType: TextInputType.phone,
                   decoration: const InputDecoration(
-                    labelText: 'le num de Compte OM-MOMO qui fera le transfert',
+                    labelText: 'numéro OM/MOMO',
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
-                    // if (value == null || value.isEmpty) {
-                    //   return 'le de Compte OM-MOMO qui fera le transfert';
-                    // }
+                    if (value == null || value.isEmpty) {
+                      return 'Veuillez entrer votre numero de Compte OM-MOMO';
+                    }
                     return null;
                   },
                   onSaved: (value) {
@@ -247,50 +234,18 @@ class _InvestFormScreenState extends State<InvestFormScreen>
                 const SizedBox(height: 16.0),
                 TextFormField(
                   decoration: const InputDecoration(
-                    labelText: 'Le nom de compte OM-MOMO qui fera le transfert',
+                    labelText: 'Nom_Compte OM/MOMO',
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
-                    // if (value == null || value.isEmpty) {
-                    //   return 'Le nom de compte OM-MOMO qui fera le transfert';
-                    // }
+                    if (value == null || value.isEmpty) {
+                      return 'Veuillez entrer votre nom de Compte';
+                    }
                     return null;
                   },
                   onSaved: (value) {
                     setState(() {
                       _nomCompte = value;
-                    });
-                  },
-                ),
-                Divider(),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "SI VOUS PAYEZ EN UDST",
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w900,
-                        color: Colors.amber),
-                  ),
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'VOTRE ADDRESSE DE PORTEFEUILLE USDT',
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (value) {
-                    // if (value == null || value.isEmpty) {
-                    //   return 'Le nom de compte OM-MOMO qui fera le transfert';
-                    // }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    setState(() {
-                      _portefeuille = value;
                     });
                   },
                 ),
@@ -303,10 +258,10 @@ class _InvestFormScreenState extends State<InvestFormScreen>
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
 
-                      await _addInvestissementToFirestore();
+                      await _addRetraitToFirestore();
                     }
                   },
-                  child: const Text('CONFIRMER L\'INVESTISSEMENT'),
+                  child: const Text('CONFIRMER LE RETRAIT'),
                 ),
               ],
             ),

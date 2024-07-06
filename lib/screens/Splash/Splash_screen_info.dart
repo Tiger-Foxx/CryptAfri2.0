@@ -1,11 +1,11 @@
-import 'package:cryptafri/screens/AddProductScreen.dart';
-import 'package:cryptafri/screens/HomeScreen.dart';
+import 'package:cryptafri/screens/forms/AddProductScreen.dart';
+import 'package:cryptafri/screens/home/HomeScreen.dart';
 import 'package:cryptafri/screens/main_screen_page.dart';
 import 'package:cryptafri/screens/services/firebase_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
-import 'onboarding_screen.dart';
+import '../onboarding_screen.dart';
 
 class Splash_screen_info extends StatefulWidget {
   static const routeName = 'splash_info1';

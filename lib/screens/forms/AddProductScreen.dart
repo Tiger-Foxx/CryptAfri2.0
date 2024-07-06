@@ -2,15 +2,15 @@
 import 'dart:ffi';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cryptafri/screens/Splash_screen_info.dart';
+import 'package:cryptafri/screens/Splash/Splash_screen_info.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:math';
-import 'HomeScreen.dart';
-import 'Splash_screen.dart';
-import 'main_screen_page.dart';
+import '../home/HomeScreen.dart';
+import '../Splash_screen.dart';
+import '../main_screen_page.dart';
 import 'package:lottie/lottie.dart';
 
 // Définir la classe AddProductScreen qui hérite de StatefulWidget

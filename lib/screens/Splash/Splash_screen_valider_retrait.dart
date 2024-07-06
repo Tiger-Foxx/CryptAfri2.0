@@ -20,9 +20,6 @@ class _Splash_screen_valider_retraitState
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 60000), () {
-      Navigator.pushReplacement(context, _createRoute());
-    });
   }
 
   @override
@@ -73,7 +70,7 @@ class _Splash_screen_valider_retraitState
                   const SizedBox(height: 8.0),
                   ElevatedButton(
                     onPressed: () async {
-                      Navigator.pushNamed(context, 'retrait');
+                      Navigator.pushNamed(context, 'main');
                       await FirebaseApi().sendRetraitNotif();
                     },
                     child: const Text('CONTINUER'),

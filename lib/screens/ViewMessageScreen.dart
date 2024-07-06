@@ -11,7 +11,12 @@ class MessageFeedPage extends StatelessWidget {
       backgroundColor: const Color.fromARGB(56, 255, 193, 7),
       appBar: AppBar(
         backgroundColor: Colors.amber,
-        title: const Text('DU NOUVEAU SUR CRYPTAFRI'),
+        title: const Text(
+          'DU NOUVEAU',
+          style: TextStyle(
+            fontWeight: FontWeight.w800,
+          ),
+        ),
       ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance

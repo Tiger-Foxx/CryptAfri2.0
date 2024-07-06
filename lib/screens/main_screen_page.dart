@@ -1,12 +1,13 @@
-import 'package:cryptafri/screens/AddMessageScreen.dart';
+import 'package:cryptafri/screens/admin/AddMessageScreen.dart';
 import 'package:cryptafri/screens/InvestissementScreen.dart';
 import 'package:cryptafri/screens/ViewMessageScreen.dart';
+import 'package:cryptafri/screens/admin/distributionScreen.dart';
 import 'package:cryptafri/screens/services/firebase_api.dart';
-import 'package:cryptafri/screens/transactionsScreen.dart';
+import 'package:cryptafri/screens/admin/transactionsScreen.dart';
 import 'package:flutter/material.dart';
-import 'AddProductScreen.dart';
+import 'forms/AddProductScreen.dart';
 import 'SellsScreen.dart';
-import 'HomeScreen.dart';
+import 'home/HomeScreen.dart';
 import 'InfosScreen.dart';
 
 import 'SearchPage.dart';
@@ -34,6 +35,7 @@ class _MainScreenPageState extends State<MainScreenPage> {
     TransactionsPage(),
     SendMessagePage(),
     MessageFeedPage(),
+    DistributionPage(),
     InfosPage(),
   ];
 
@@ -77,8 +79,12 @@ class _MainScreenPageState extends State<MainScreenPage> {
             label: 'Message',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.message),
+            icon: Icon(Icons.messenger_rounded),
             label: 'Message',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.emoji_emotions),
+            label: 'Distribuer',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.info),

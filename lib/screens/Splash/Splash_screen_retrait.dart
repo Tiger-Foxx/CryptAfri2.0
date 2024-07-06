@@ -18,9 +18,6 @@ class _Splash_screen_retraitState extends State<Splash_screen_retrait> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 60000), () {
-      Navigator.pushReplacement(context, _createRoute());
-    });
   }
 
   @override
@@ -71,7 +68,7 @@ class _Splash_screen_retraitState extends State<Splash_screen_retrait> {
                   const SizedBox(height: 8.0),
                   ElevatedButton(
                     onPressed: () async {
-                      Navigator.pushNamed(context, 'main');
+                      Navigator.pushNamed(context, 'retrait');
                       //await firebaseApi().sendVenteNotif();
                     },
                     child: const Text('CONTINUER'),

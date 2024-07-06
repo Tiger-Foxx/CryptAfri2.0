@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'sign-in_screen.dart';
-import 'sign-up_screen.dart';
+import 'Auth/sign-in_screen.dart';
+import 'Auth/sign-up_screen.dart';
 import 'splash_screen.dart';
 import 'package:lottie/lottie.dart';
 

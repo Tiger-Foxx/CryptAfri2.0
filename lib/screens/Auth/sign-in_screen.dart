@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'ForgotScreen.dart';
-import 'Splash_screen.dart';
-import 'HomeScreen.dart';
+import '../Splash_screen.dart';
+import '../home/HomeScreen.dart';
 import 'sign-up_screen.dart';
-import 'services/Authentification.dart';
+import '../services/Authentification.dart';
 import 'package:email_validator/email_validator.dart';
-import 'models/USER.dart';
-import 'main_screen_page.dart';
+import '../models/USER.dart';
+import '../main_screen_page.dart';
 import 'package:lottie/lottie.dart';
 
 class SignInScreen extends StatefulWidget {

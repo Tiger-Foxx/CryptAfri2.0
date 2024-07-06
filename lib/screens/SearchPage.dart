@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:cryptafri/screens/HomeScreen.dart';
-import 'package:cryptafri/screens/sign-in_screen.dart';
+import 'package:cryptafri/screens/home/HomeScreen.dart';
+import 'package:cryptafri/screens/Auth/sign-in_screen.dart';
 import 'package:lottie/lottie.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

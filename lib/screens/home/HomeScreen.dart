@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:cryptafri/screens/services/products.services.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'ProductPage.dart';
+import '../forms/ProductPage.dart';
 import 'package:search_page/search_page.dart';
-import 'sign-in_screen.dart';
-import 'models/product.model.dart';
+import '../Auth/sign-in_screen.dart';
+import '../models/product.model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lottie/lottie.dart';
-import 'sign-up_screen.dart';
+import '../Auth/sign-up_screen.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
 
@@ -440,16 +440,16 @@ class CardExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ProductModel productModel = ProductModel(
-      frais: produit['frais'],
+      frais: produit['frais'] + 0.0,
       Category: produit['category'],
       numero: produit['numero'],
       ID: produit['ID'],
       date: produit['date'],
       image: produit['image'],
-      prix_achat: produit['prix_achat'],
+      prix_achat: produit['prix_achat'] + 0.0,
       name: produit['name'],
-      quantity: produit['quantity'],
-      prix_vente: produit['prix_vente'],
+      quantity: produit['quantity'] + 0.0,
+      prix_vente: produit['prix_vente'] + 0.0,
       porteFeuille: produit['porteFeuille'],
       min_vente: produit['min_vente'],
     );

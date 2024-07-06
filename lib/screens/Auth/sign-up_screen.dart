@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'HomeScreen.dart';
-import 'Splash_screen.dart';
+import '../home/HomeScreen.dart';
+import '../Splash_screen.dart';
 import 'sign-in_screen.dart';
 import 'package:email_validator/email_validator.dart';
-import 'main_screen_page.dart';
+import '../main_screen_page.dart';
 import 'package:lottie/lottie.dart';
-import 'services/Authentification.dart';
-import 'models/USER.dart';
+import '../services/Authentification.dart';
+import '../models/USER.dart';
 
 class SignUpScreen extends StatefulWidget {
   static const routeName = 'sign-up';

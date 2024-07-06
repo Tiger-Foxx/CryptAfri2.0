@@ -10,7 +10,7 @@ class ProductModel {
   var numero;
   var min_vente;
   var porteFeuille;
-  int frais = 0;
+  var frais = 0.0;
   ProductModel({
     required this.Category,
     required this.ID,

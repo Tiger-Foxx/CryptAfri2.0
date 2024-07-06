@@ -1,3 +1,4 @@
+import 'package:cryptafri/screens/services/firebase_api.dart';
 import 'package:cryptafri/screens/services/fonctions.utiles.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -51,6 +52,15 @@ class _TransactionsPageState extends State<TransactionsPage> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text('Transaction validée')),
                     );
+                    if (transaction.type.toLowerCase() == 'retrait') {
+                      retirerSomme(
+                          transaction.emailUtilisateur, transaction.montant);
+                    } else {
+                      ajouterSomme(
+                          transaction.emailUtilisateur, transaction.montant);
+                    }
+                    FirebaseApi()
+                        .sendValiderNotif(transaction.emailUtilisateur);
                   },
                   child: Container(
                     decoration: BoxDecoration(

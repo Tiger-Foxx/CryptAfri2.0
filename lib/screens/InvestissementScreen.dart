@@ -4,7 +4,8 @@
 // import 'package:cryptafri/screens/RetraitScreen.dart';
 // import 'package:cryptafri/screens/Splash_screen_info.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cryptafri/screens/Splash_screen_retrait.dart';
+import 'package:cryptafri/screens/Splash/Splash_screen_retrait.dart';
+import 'package:cryptafri/screens/models/compte.model.dart';
 import 'package:cryptafri/screens/models/transaction.model.dart';
 import 'package:cryptafri/screens/services/fonctions.utiles.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
@@ -19,7 +20,7 @@ import 'package:flutter/services.dart';
 class InvestissementScreen extends StatefulWidget {
   const InvestissementScreen({super.key});
   static const routeName = 'Investissement';
-
+  static double max = 0.0;
   @override
   State<InvestissementScreen> createState() => _InvestissementScreenState();
 }
@@ -28,17 +29,24 @@ class _InvestissementScreenState extends State<InvestissementScreen> {
   TransactionModel?
       _latestTransaction; // Variable pour stocker la dernière transaction de l'utilisateur
 
+  Compte? _compte;
+
   final List<bool> _termsChecked = [false, false, false];
+  final List<String> termes = [
+    "1. Objectif de l'investissement :\nL'investissement dans la plateforme Cryptafri n'implique pas l'acquisition de parts ou d'actions de la société Cryptafri. L'objectif de cet investissement est de générer des revenus récurrents pour les investisseurs grâce aux différentes activités menées par l'équipe Cryptafri.\n\n'",
+    "2. Modalités d'investissement :\na. Souscription des fonds : En tant qu\'investisseur, vous pouvez placer des fonds sur la plateforme Cryptafri conformément aux modalités spécifiées dans le processus d\'investissement. Le montant minimum d\'investissement et les conditions de paiement seront clairement définis dans le processus de souscription.\n\nb. Rendement de l\'investissement : Les investisseurs recevront un intérêt de 4% sur leurs fonds investis, versé de manière hebdomadaire. Ce rendement est garanti par Cryptafri et ne dépend pas des performances de la plateforme.\n\nc. Retrait des fonds : Les fonds investis ne sont retirables qu\'après une période de 3 mois à compter de la date d\'investissement. seuls les intérêts pourrons être retirable pendant les 3 premiers mois. Passé ce délai, les investisseurs peuvent retirer leurs fonds investi à tout moment.\n\n",
+    "3. Responsabilité de Cryptafri :\na. Gestion des fonds : Cryptafri s\'engage à gérer les fonds des investisseurs avec le plus grand soin et à les utiliser conformément à l\'objectif de générer des revenus récurrents. Nous nous efforcerons d\'assurer une gestion diligente et responsable des fonds investis.\n\nb. Clause de non-responsabilité : Cryptafri ne peut pas garantir à 100% que les rendements prévus seront atteints. La valeur des fonds investis peut être affectée par divers facteurs, y compris les conditions du marché et d\'autres circonstances économiques. Vous comprenez et acceptez que l\'investissement comporte des risques inhérents et que vous êtes seul responsable de vos décisions d\'investissement.",
+  ];
   bool _loading = true;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   String _errorMessage = '';
   @override
   void initState() {
     super.initState();
-    _fetchLatestTransaction(); // Récupérer la dernière transaction au démarrage
+    _fetchLatestTransactionAndAccount(); // Récupérer la dernière transaction au démarrage
   }
 
-  Future<void> _fetchLatestTransaction() async {
+  Future<void> _fetchLatestTransactionAndAccount() async {
     try {
       String email = getUserEmail()!;
       QuerySnapshot snapshot = await FirebaseFirestore.instance
@@ -47,25 +55,28 @@ class _InvestissementScreenState extends State<InvestissementScreen> {
           .orderBy('date', descending: true)
           .limit(1)
           .get();
+      _compte = await getCompte(email);
 
-      if (snapshot.docs.isNotEmpty) {
-        setState(() {
+      if (snapshot.docs.isNotEmpty && _compte != null) {
+        setState(() async {
           _latestTransaction =
               TransactionModel.fromFirestore(snapshot.docs.first);
+
           _loading = false;
         });
       } else {
         setState(() {
           _latestTransaction = null; // Aucun résultat trouvé
           _loading = false;
+          _compte = null;
         });
       }
     } catch (e) {
       setState(() {
-        _errorMessage = 'Erreur de chargement des transactions: $e';
+        _errorMessage = 'Erreur de chargement des transactions et compte: $e';
         _loading = false;
       });
-      print('Erreur de chargement des transactions: $e');
+      print('Erreur de chargement des transactions et compte: $e');
     }
   }
 
@@ -105,9 +116,13 @@ class _InvestissementScreenState extends State<InvestissementScreen> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                const Padding(
+                Padding(
                   padding: EdgeInsets.all(2.0),
-                  child: _HeroWidget(),
+                  child: (_compte != null)
+                      ? _HeroWidget(
+                          compte: _compte!,
+                        )
+                      : CircularProgressIndicator(),
                 ),
                 const SizedBox(height: 10),
                 _ExplanationText(onPressed: () {
@@ -319,6 +334,15 @@ class _InvestissementScreenState extends State<InvestissementScreen> {
                                   _onCheckboxChanged(index, value!);
                                 });
                               },
+                              subtitle: Text(
+                                termes[index],
+                                style: const TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: 'Poppins',
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
                             const Divider(),
                           ],
@@ -448,40 +472,41 @@ class _InvestButton extends StatelessWidget {
 }
 
 class _HeroWidget extends StatefulWidget {
-  // ignore: unused_element
-  const _HeroWidget({super.key});
+  final Compte compte;
+
+  const _HeroWidget({Key? key, required this.compte}) : super(key: key);
 
   @override
   State<_HeroWidget> createState() => __HeroWidgetState();
 }
 
 class __HeroWidgetState extends State<_HeroWidget> {
-  final _infos = [
-    {
-      'code': 'VOTRE SOLDE EST ICI',
-      'title': '25000 XAF',
-      'image': 'assets/images/kiss2.jpg',
-    },
-    {
-      'code': 'VOTRE SOLDE EST ICI',
-      'title': '14 USDT',
-      'image': 'assets/images/kiss1.png',
-    },
-    {
-      'code': 'CrytpAfri',
-      'title': 'INVESTISSEZ !',
-      'image': 'assets/images/kiss3.jpg',
-    },
-  ];
+  late List<Map<String, String>> _infos;
   int _currentInfo = 0;
-  // ignore: non_constant_identifier_names
-  final _PageControler = PageController();
+  final PageController _pageController = PageController();
 
   @override
   void initState() {
     super.initState();
-    _PageControler.addListener(() {
-      setState(() => _currentInfo = _PageControler.page!.round());
+    _infos = [
+      {
+        'code': 'VOTRE SOLDE EST ICI',
+        'title': '${widget.compte.solde.toStringAsFixed(2)} XAF',
+        'image': 'assets/images/kiss2.jpg',
+      },
+      {
+        'code': 'VOTRE SOLDE EN USDT',
+        'title': '${widget.compte.soldeUSDT.toStringAsFixed(2)} USDT',
+        'image': 'assets/images/kiss1.png',
+      },
+      {
+        'code': 'VOTRE SOLDE RETIRABLE',
+        'title': '${widget.compte.soldeRetirable.toStringAsFixed(2)} XAF',
+        'image': 'assets/images/kiss3.jpg',
+      },
+    ];
+    _pageController.addListener(() {
+      setState(() => _currentInfo = _pageController.page!.round());
     });
   }
 
@@ -496,7 +521,7 @@ class __HeroWidgetState extends State<_HeroWidget> {
             color: Colors.grey.withOpacity(0.5),
             spreadRadius: 2,
             blurRadius: 2,
-            offset: const Offset(0, 3), // changes position of shadow
+            offset: const Offset(0, 3),
           )
         ],
         gradient: const LinearGradient(
@@ -509,7 +534,7 @@ class __HeroWidgetState extends State<_HeroWidget> {
       child: Stack(
         children: [
           PageView(
-            controller: _PageControler,
+            controller: _pageController,
             children: _infos.map((info) => _buildInfo(info)).toList(),
           ),
           Container(
@@ -546,7 +571,7 @@ class __HeroWidgetState extends State<_HeroWidget> {
         top: 29,
         left: 29,
         child: Text(
-          _infos[_currentInfo]['code']!.toUpperCase(),
+          info['code']!.toUpperCase(),
           style: const TextStyle(
             color: Color.fromRGBO(255, 255, 255, 0.702),
             fontSize: 20,
@@ -559,7 +584,7 @@ class __HeroWidgetState extends State<_HeroWidget> {
         top: 80,
         left: 29,
         child: Text(
-          _infos[_currentInfo]['title']!.toUpperCase(),
+          info['title']!.toUpperCase(),
           style: const TextStyle(
             color: Colors.white,
             fontSize: 35,
@@ -575,7 +600,7 @@ class __HeroWidgetState extends State<_HeroWidget> {
           onPressed: () {
             Navigator.pushNamed(
               context,
-              Splash_screen_retrait.routeName,
+              'splash_retrait',
             );
           },
           style: ElevatedButton.styleFrom(

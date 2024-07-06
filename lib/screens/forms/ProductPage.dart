@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cryptafri/screens/Splash_screen_info2.dart';
+import 'package:cryptafri/screens/Splash/Splash_screen_info2.dart';
 import 'package:cryptafri/screens/services/firebase_api.dart';
 import 'package:flutter/material.dart';
 import 'package:cryptafri/screens/models/product.model.dart';
@@ -21,8 +21,8 @@ class _ProductPageState extends State<ProductPage> {
   final _formKey = GlobalKey<FormState>();
   @override
   var fav = false;
-  int frais = 0;
-  int number = 0;
+  double frais = 0;
+  double number = 0;
   String? Reseau;
   String? porteFeuille;
   String? whatsapp;
@@ -30,7 +30,7 @@ class _ProductPageState extends State<ProductPage> {
   String? numero;
   String? adressePorteFeuille;
   String? ID;
-  int prix = 0;
+  double prix = 0.0;
   void makeFav() {
     setState(() {
       fav = !fav;
@@ -71,8 +71,8 @@ class _ProductPageState extends State<ProductPage> {
       'date': Timestamp.fromDate(DateTime.now()),
       'nom': Nom,
       'porte_feuille': porteFeuille,
-      'quantite': number,
-      'montant_XAF': (number + frais) * prix,
+      'quantite': number * 0.98 / (prix),
+      'montant_XAF': number,
       'numero_compte': numero,
       'whatsapp': whatsapp,
     });
@@ -211,16 +211,14 @@ class _ProductPageState extends State<ProductPage> {
                   Container(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
-                      number.toString() +
+                      (number * 0.98 / product.prix_achat).toStringAsFixed(2) +
                           " " +
                           product.name +
-                          " + " +
-                          product.frais.toString() +
-                          " (frais) "
+                          " = " +
+                          number.toString() +
+                          " XAF  "
                               '\n' +
-                          (product.prix_vente * (number + product.frais))
-                              .toString() +
-                          ' XAF |Total',
+                          'Total (frais inclus)',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: 'Poppins',
@@ -245,29 +243,29 @@ class _ProductPageState extends State<ProductPage> {
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
                               labelStyle: TextStyle(color: Colors.white),
-                              labelText: 'Quantite Voulue',
+                              labelText: 'Quantite Voulue (Prix XAF)',
                               border: OutlineInputBorder(),
                             ),
                             // Valider que le champ contient un nombre entier
                             validator: (value) {
                               if (value!.isEmpty ||
-                                  int.tryParse(value) == null) {
+                                  double.tryParse(value) == null) {
                                 return 'Veuillez entrer un nombre entier';
                               }
                               return null;
                             },
                             onSaved: (value) {
                               setState(() {
-                                number = int.parse(value!);
+                                number = double.parse(value!);
                                 print(value);
                               });
                             },
                             onChanged: (value) {
                               setState(() {
-                                number = int.parse(value!);
+                                number = double.parse(value!) + 0.0;
                                 porteFeuille = product.porteFeuille;
-                                prix = product.prix_vente;
-                                frais = product.frais;
+                                prix = product.prix_vente + 0.0;
+                                frais = product.frais + 0.0;
                                 print(value);
                               });
                             },
