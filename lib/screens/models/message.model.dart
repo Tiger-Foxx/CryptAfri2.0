@@ -10,7 +10,8 @@ class MessageModel {
     required this.id,
     required this.date,
     required this.content,
-    required this.urlImage,
+    this.urlImage =
+        'https://a.c-dn.net/c/content/dam/publicsites/sgx/images/Email/Trading_Cryptocurrencies_Effectively_Using_PriceAction.jpg/jcr:content/renditions/original-size.webp',
   });
 
   factory MessageModel.fromFirestore(DocumentSnapshot doc) {

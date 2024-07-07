@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class InfosPage extends StatelessWidget {
-  static String email = 'donfackarthur750@gmail.com';
+  static String email = 'cryptafri4@gmail.com';
   static String OM = "658121197";
   static String MOMO = "678585611";
   static String whatsapp = '+237678585611';

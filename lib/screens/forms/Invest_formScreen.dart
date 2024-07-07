@@ -125,7 +125,9 @@ class _InvestFormScreenState extends State<InvestFormScreen>
         context: context,
         isDismissible: false,
         builder: (BuildContext context) {
-          return const Splash_screen_valider_invest(); // votre page de chargement
+          return Splash_screen_valider_invest(
+            montant: _montant.toString(),
+          ); // votre page de chargement
         });
     await Future.delayed(const Duration(seconds: 50), () {
       Navigator.pushNamed(context, 'main'); // fermer la feuille

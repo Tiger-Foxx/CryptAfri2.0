@@ -11,7 +11,8 @@ import '../onboarding_screen.dart';
 
 class Splash_screen_info2 extends StatefulWidget {
   static const routeName = 'splash_info2';
-  const Splash_screen_info2({super.key});
+  const Splash_screen_info2({super.key, montant});
+  final String montant = '';
 
   @override
   State<Splash_screen_info2> createState() => _Splash_screen_info2State();
@@ -28,120 +29,124 @@ class _Splash_screen_info2State extends State<Splash_screen_info2> {
 
   @override
   Widget build(BuildContext context) {
+    String montant = widget.montant;
     return Scaffold(
-      body: Container(
-        color: Color.fromARGB(255, 42, 42, 43),
-        child: Center(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 10.0,
-              ),
-              Lottie.asset('assets/lotties/bitcoin1.json', height: 200),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    Text(
-                      "POUR FINALISER VOTRE TRANSACTION,\n VOUS DEVEZ  EFFECTUER UN DEPOT SUR NOTRE COMPTE OM OU MTN MONEY \n (les NUMEROS sont aussi disponibles dans la section INFO)",
-                      style: TextStyle(
-                        color: Colors.white54,
-                        fontFamily: 'Poppins',
-                      ),
-                      overflow: TextOverflow.visible,
-                      softWrap: true,
-                      textAlign: TextAlign.center,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Text(
-                        "Veuillez patienter quelques minutes, Vous Recevrez Votre Depot Apres que vous Ayez termine la transaction,\nChoisissez le reseau de Transfert ",
+      body: SingleChildScrollView(
+        child: Container(
+          color: Color.fromARGB(255, 42, 42, 43),
+          child: Center(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 10.0,
+                ),
+                Lottie.asset('assets/lotties/bitcoin1.json', height: 200),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Text(
+                        "POUR FINALISER VOTRE TRANSACTION,\n VOUS DEVEZ  EFFECTUER UN DEPOT DE ${montant} XAF SUR NOTRE COMPTE OM OU MTN MONEY \n (les NUMEROS sont aussi disponibles dans la section INFO)",
                         style: TextStyle(
-                            color: Color.fromARGB(255, 182, 177, 177),
-                            fontFamily: 'Poppins',
-                            fontSize: 14),
+                          color: Colors.white54,
+                          fontFamily: 'Poppins',
+                        ),
                         overflow: TextOverflow.visible,
                         softWrap: true,
                         textAlign: TextAlign.center,
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Text(
-                        "Attention veillez nous contacter pour négocier des crypto-monnaies non listées sur la plateforme.\nCryptAfri ne vous contactera jamais en premier",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w800,
-                            color: Colors.red),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: SizedBox(
-                  width: 200,
-                  child: Column(
-                    children: [
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromARGB(255, 221, 93, 2)),
-                        onPressed: () async {
-                          await FirebaseApi().sendAchatNotif();
-                          Navigator.pushReplacement(context, _createRoute());
-                          sendMsg("#150*1*1*" + InfosPage.OM + "#");
-                        },
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Image.asset(
-                                'assets/images/OM.png',
-                                height: 35,
-                                width: 35,
-                              ),
-                              Text(
-                                'ORANGE MONEY',
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Text(
+                          "Veuillez patienter quelques minutes, Vous Recevrez Votre Depot Apres que vous Ayez termine la transaction,\nChoisissez le reseau de Transfert ",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 182, 177, 177),
+                              fontFamily: 'Poppins',
+                              fontSize: 14),
+                          overflow: TextOverflow.visible,
+                          softWrap: true,
+                          textAlign: TextAlign.center,
                         ),
                       ),
-                      SizedBox(height: 8.0),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                const Color.fromARGB(255, 221, 166, 2)),
-                        onPressed: () async {
-                          await FirebaseApi().sendAchatNotif();
-                          Navigator.pushReplacement(context, _createRoute());
-                          sendMsg("*126#");
-                        },
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Image.asset(
-                                'assets/images/MOMO.png',
-                                height: 35,
-                                width: 35,
-                              ),
-                              Text(
-                                'MTN MOMO',
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Text(
+                          "Attention veillez nous contacter pour négocier des crypto-monnaies non listées sur la plateforme.\nCryptAfri ne vous contactera jamais en premier",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w800,
+                              color: Colors.red),
                         ),
                       ),
                     ],
                   ),
                 ),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: SizedBox(
+                    width: 200,
+                    child: Column(
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Color.fromARGB(255, 221, 93, 2)),
+                          onPressed: () async {
+                            await FirebaseApi().sendAchatNotif();
+                            Navigator.pushReplacement(context, _createRoute());
+                            sendMsg(
+                                "#150*1*1*" + InfosPage.OM + "*${montant}#");
+                          },
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Image.asset(
+                                  'assets/images/OM.png',
+                                  height: 35,
+                                  width: 35,
+                                ),
+                                Text(
+                                  'ORANGE MONEY',
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 8.0),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor:
+                                  const Color.fromARGB(255, 221, 166, 2)),
+                          onPressed: () async {
+                            await FirebaseApi().sendAchatNotif();
+                            Navigator.pushReplacement(context, _createRoute());
+                            sendMsg("*126*9*${InfosPage.MOMO}*${montant}#");
+                          },
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Image.asset(
+                                  'assets/images/MOMO.png',
+                                  height: 35,
+                                  width: 35,
+                                ),
+                                Text(
+                                  'MTN MOMO',
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

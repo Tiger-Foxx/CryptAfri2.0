@@ -105,3 +105,14 @@ Future<void> ajouterMontantTousComptes(double montant) async {
     await doc.reference.update(compte.toMap());
   }
 }
+
+Future<void> supprimerMessage(String id) async {
+  try {
+    CollectionReference messages =
+        FirebaseFirestore.instance.collection('messages');
+    await messages.doc(id).delete();
+    print('Message supprimé avec succès!');
+  } catch (e) {
+    print('Erreur lors de la suppression du message: $e');
+  }
+}

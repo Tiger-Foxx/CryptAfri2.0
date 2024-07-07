@@ -13,28 +13,29 @@ import 'InfosScreen.dart';
 
 import 'SearchPage.dart';
 
-class MainScreenPage extends StatefulWidget {
-  const MainScreenPage(
+class MainScreenPage_client extends StatefulWidget {
+  const MainScreenPage_client(
       {super.key,
       this.param = 0}); // Paramètre optionnel avec valeur par défaut 0
   final int param;
-  static final String routeName = 'main';
+  static final String routeName = 'mainClient';
 
   @override
-  State<MainScreenPage> createState() =>
-      _MainScreenPageState(currentIndex: param);
+  State<MainScreenPage_client> createState() =>
+      _MainScreenPage_clientState(currentIndex: param);
 }
 
-class _MainScreenPageState extends State<MainScreenPage> {
-  _MainScreenPageState({this.currentIndex = 0});
+class _MainScreenPage_clientState extends State<MainScreenPage_client> {
+  _MainScreenPage_clientState({this.currentIndex = 0});
   @override
   int currentIndex;
   final pages = [
     const HomeScreen(),
-    TransactionsPage(),
-    SendMessagePage(),
+    const AddProductScreen(),
+    const InvestissementScreen(),
     MessageFeedPage(),
-    DistributionPage(),
+    LienScreen(),
+    InfosPage(),
   ];
 
   Widget build(BuildContext context) {
@@ -59,22 +60,28 @@ class _MainScreenPageState extends State<MainScreenPage> {
             icon: Icon(Icons.home),
             label: 'Acceuil',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.sell),
+            label: 'Vendre',
+          ),
 
           BottomNavigationBarItem(
-            icon: Icon(Icons.admin_panel_settings),
-            label: 'Transactions',
+            icon: Icon(Icons.account_balance_rounded),
+            label: 'Investissement',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            label: 'EcrireMSG',
-          ),
+
           BottomNavigationBarItem(
             icon: Icon(Icons.messenger_rounded),
-            label: 'Messages',
+            label: 'News',
+          ),
+
+          BottomNavigationBarItem(
+            icon: Icon(Icons.link),
+            label: 'Liens',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.emoji_emotions),
-            label: 'Distribuer',
+            icon: Icon(Icons.info),
+            label: 'Informations',
           ),
         ],
       ),

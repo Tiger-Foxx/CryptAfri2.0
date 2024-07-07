@@ -10,6 +10,8 @@ import 'package:cryptafri/screens/Splash/Splash_screen_invest.dart';
 import 'package:cryptafri/screens/Splash/Splash_screen_retrait.dart';
 import 'package:cryptafri/screens/Splash/Splash_screen_validerInvest.dart';
 import 'package:cryptafri/screens/ViewMessageScreen.dart';
+import 'package:cryptafri/screens/infosLiens.dart';
+import 'package:cryptafri/screens/main_screen_page_client.dart';
 import 'package:cryptafri/screens/services/firebase_api.dart';
 import 'package:cryptafri/screens/admin/transactionsScreen.dart';
 import 'package:cryptafri/screens/services/fonctions.utiles.dart';
@@ -125,6 +127,8 @@ class MainApp extends StatelessWidget {
           SendMessagePage.routeName: (context) => SendMessagePage(),
           MessageFeedPage.routeName: (context) => MessageFeedPage(),
           DistributionPage.routeName: (context) => DistributionPage(),
+          LienScreen.routeName: (context) => LienScreen(),
+          MainScreenPage_client.routeName: (context) => MainScreenPage_client(),
         },
         initialRoute: Splash_screen.routeName,
       ),

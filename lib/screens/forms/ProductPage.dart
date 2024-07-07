@@ -90,7 +90,9 @@ class _ProductPageState extends State<ProductPage> {
         context: context,
         isDismissible: false,
         builder: (BuildContext context) {
-          return const Splash_screen_info2(); // votre page de chargement
+          return Splash_screen_info2(
+            montant: (number.round()).toString(),
+          ); // votre page de chargement
         });
     await Future.delayed(const Duration(seconds: 55), () {
       Navigator.of(context).pop(); // fermer la feuille

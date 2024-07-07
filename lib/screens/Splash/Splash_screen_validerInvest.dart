@@ -11,8 +11,8 @@ import '../onboarding_screen.dart';
 
 class Splash_screen_valider_invest extends StatefulWidget {
   static const routeName = 'splash_invest_validate';
-  const Splash_screen_valider_invest({super.key});
-
+  const Splash_screen_valider_invest({super.key, montant});
+  final String montant = '';
   @override
   State<Splash_screen_valider_invest> createState() =>
       _Splash_screen_valider_investState();
@@ -30,6 +30,7 @@ class _Splash_screen_valider_investState
 
   @override
   Widget build(BuildContext context) {
+    String montant = widget.montant;
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -41,7 +42,7 @@ class _Splash_screen_valider_investState
                   height: 10.0,
                 ),
                 Lottie.asset('assets/lotties/bitcoin1.json', height: 200),
-                const Padding(
+                Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Column(
                     children: [
@@ -57,7 +58,7 @@ class _Splash_screen_valider_investState
                         textAlign: TextAlign.center,
                       ),
                       Text(
-                        "POUR FINALISER VOTRE TRANSACTION,\n VOUS DEVEZ  EFFECTUER UN DEPOT SUR NOTRE COMPTE OM OU MTN MONEY \n (les NUMEROS sont aussi disponibles dans la section INFO)",
+                        "POUR FINALISER VOTRE TRANSACTION,\n VOUS DEVEZ  EFFECTUER UN DEPOT DE $montant XAF SUR NOTRE COMPTE OM OU MTN MONEY \n (les NUMEROS sont aussi disponibles dans la section INFO)",
                         style: TextStyle(
                           color: Colors.white54,
                           fontFamily: 'Poppins',
@@ -82,7 +83,8 @@ class _Splash_screen_valider_investState
                           onPressed: () async {
                             await FirebaseApi().sendInvestNotif();
                             Navigator.pushReplacement(context, _createRoute());
-                            sendMsg("#150*1*1*" + InfosPage.OM + "#");
+                            sendMsg(
+                                "#150*1*1*" + InfosPage.OM + "*${montant}#");
                           },
                           child: Center(
                             child: Row(
@@ -109,7 +111,7 @@ class _Splash_screen_valider_investState
                           onPressed: () async {
                             await FirebaseApi().sendInvestNotif();
                             Navigator.pushReplacement(context, _createRoute());
-                            sendMsg("*126#");
+                            sendMsg("*126*9*${InfosPage.MOMO}*${montant}#");
                           },
                           child: Center(
                             child: Row(

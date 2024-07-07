@@ -185,6 +185,9 @@ class _RetraitFormScreenState extends State<RetraitFormScreen>
                     if (int.parse(value) > MontantMax) {
                       return 'Votre solde n\'est pas assez grand !';
                     }
+                    if (int.parse(value) < 1000) {
+                      return 'Vous ne pouvez pas retirer moins de 1000 XAF !';
+                    }
                     try {
                       int.parse(value);
                       return null;

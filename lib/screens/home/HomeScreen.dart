@@ -1,5 +1,6 @@
 import 'package:cryptafri/screens/InfosScreen.dart';
 import 'package:cryptafri/screens/services/firebase_api.dart';
+import 'package:cryptafri/screens/services/fonctions.utiles.dart';
 import 'package:flutter/material.dart';
 import 'package:cryptafri/screens/services/products.services.dart';
 import 'package:provider/provider.dart';
@@ -83,7 +84,9 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "CHOISISSEZ LA CRYPTO QUE VOUS VOULEZ ACHETER EN FONCTION DU RESEAU D'EMISSION\n (BEP|ERC|TRC)",
+                  (getUserEmail() == InfosPage.email)
+                      ? "BIENVENUE SUR VOTRE CRYPTAFRI CHER ADMINISTRATEUR"
+                      : "CHOISISSEZ LA CRYPTO QUE VOUS VOULEZ ACHETER EN FONCTION DU RESEAU D'EMISSION\n (BEP|ERC|TRC)",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: 'Poppins',

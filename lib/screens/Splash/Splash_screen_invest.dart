@@ -27,56 +27,58 @@ class _Splash_screen_investState extends State<Splash_screen_invest> {
   Widget build(BuildContext context) {
     return Center(
       child: Scaffold(
-        body: Center(
-          child: Container(
-            color: const Color.fromARGB(255, 42, 42, 43),
-            child: Center(
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 10.0,
-                  ),
-                  Lottie.asset('assets/lotties/bitcoin1.json', height: 200),
-                  const Padding(
-                    padding: EdgeInsets.all(12.0),
-                    child: Center(
-                      child: Column(
-                        children: [
-                          Text(
-                            "INVESTISSEMENT SUR CRYPTAFRI !",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Poppins',
-                              fontSize: 27,
-                              fontWeight: FontWeight.bold,
+        body: SingleChildScrollView(
+          child: Center(
+            child: Container(
+              color: const Color.fromARGB(255, 42, 42, 43),
+              child: Center(
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 10.0,
+                    ),
+                    Lottie.asset('assets/lotties/bitcoin1.json', height: 200),
+                    const Padding(
+                      padding: EdgeInsets.all(12.0),
+                      child: Center(
+                        child: Column(
+                          children: [
+                            Text(
+                              "INVESTISSEMENT SUR CRYPTAFRI !",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'Poppins',
+                                fontSize: 27,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              overflow: TextOverflow.visible,
+                              softWrap: true,
+                              textAlign: TextAlign.center,
                             ),
-                            overflow: TextOverflow.visible,
-                            softWrap: true,
-                            textAlign: TextAlign.center,
-                          ),
-                          Text(
-                            "POUR EFECTUER VOTRE INVESTISSEMENT, VOUS DEVREZ REMPLIR LE FORMULAIRE , ET ENSUITE EFFFECTUER UN DEPOT VIA MOMO , ORANGE MONEY , OU L'UNE DES ADDRESSES USDT PROPOSEE \n (SI L'INTEGRALITE DU MONTANT DE L'INVESTISSEMENT N'EST PAS ENVOYE , CELUI-CI SERA ANNULE)",
-                            style: TextStyle(
-                              color: Colors.white54,
-                              fontFamily: 'Poppins',
+                            Text(
+                              "POUR EFECTUER VOTRE INVESTISSEMENT, VOUS DEVREZ REMPLIR LE FORMULAIRE , ET ENSUITE EFFFECTUER UN DEPOT VIA MOMO , ORANGE MONEY , OU L'UNE DES ADDRESSES USDT PROPOSEE \n (SI L'INTEGRALITE DU MONTANT DE L'INVESTISSEMENT N'EST PAS ENVOYE , CELUI-CI SERA ANNULE)",
+                              style: TextStyle(
+                                color: Colors.white54,
+                                fontFamily: 'Poppins',
+                              ),
+                              overflow: TextOverflow.visible,
+                              softWrap: true,
+                              textAlign: TextAlign.center,
                             ),
-                            overflow: TextOverflow.visible,
-                            softWrap: true,
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 8.0),
-                  ElevatedButton(
-                    onPressed: () async {
-                      Navigator.pushNamed(context, 'investir');
-                      //await firebaseApi().sendVenteNotif();
-                    },
-                    child: const Text('CONTINUER'),
-                  ),
-                ],
+                    const SizedBox(height: 8.0),
+                    ElevatedButton(
+                      onPressed: () async {
+                        Navigator.pushNamed(context, 'investir');
+                        //await firebaseApi().sendVenteNotif();
+                      },
+                      child: const Text('CONTINUER'),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
