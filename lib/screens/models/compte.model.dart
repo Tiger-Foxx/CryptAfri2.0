@@ -5,10 +5,12 @@ class Compte {
   double solde;
   double soldeUSDT;
   double soldeRetirable;
+  double investissement;
 
-  Compte({required this.email, required this.solde})
+  Compte(
+      {required this.email, required this.solde, required this.investissement})
       : soldeUSDT = (solde / 650).toDouble(),
-        soldeRetirable = (solde * 0.98).toDouble();
+        soldeRetirable = ((solde - investissement) * 0.98).toDouble();
 
   factory Compte.fromMap(Map<String, dynamic> data) {
     double roundToTwoDecimals(double value) =>
@@ -17,6 +19,7 @@ class Compte {
     return Compte(
       email: data['email'],
       solde: roundToTwoDecimals(data['solde'].toDouble()),
+      investissement: roundToTwoDecimals(data['investissement'].toDouble()),
     )..updateBalances();
   }
 
@@ -28,6 +31,7 @@ class Compte {
     return Compte(
       email: data['email'],
       solde: roundToTwoDecimals(data['solde'].toDouble()),
+      investissement: roundToTwoDecimals(data['investissement'].toDouble()),
     )..updateBalances();
   }
 
@@ -37,11 +41,12 @@ class Compte {
       'solde': solde,
       'soldeUSDT': soldeUSDT,
       'soldeRetirable': soldeRetirable,
+      'investissement': investissement,
     };
   }
 
   void updateBalances() {
     soldeUSDT = (solde / 650).toDouble();
-    soldeRetirable = (solde * 0.98).toDouble();
+    soldeRetirable = ((solde - investissement) * 0.98).toDouble();
   }
 }

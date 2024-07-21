@@ -486,8 +486,8 @@ class CardExample extends StatelessWidget {
                   ),
                   subtitle: Column(
                     children: [
-                      Text("Prix de vente : " +
-                          produit['prix_vente'].toString() +
+                      Text("Prix d'achat': " +
+                          produit['prix_achat'].toString() +
                           " | " +
                           produit['porteFeuille'].toUpperCase()),
                       Text(
@@ -496,7 +496,7 @@ class CardExample extends StatelessWidget {
                             " " +
                             produit['name'].toString() +
                             " = " +
-                            (produit['frais'] * produit['prix_vente'])
+                            (produit['frais'] * produit['prix_achat'])
                                 .toString() +
                             " XAF",
                         style: TextStyle(

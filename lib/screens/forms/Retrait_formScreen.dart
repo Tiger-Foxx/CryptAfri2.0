@@ -22,7 +22,8 @@ class RetraitFormScreen extends StatefulWidget {
   static const routeName = 'retrait';
 
   // Créer le constructeur de la classe avec une clé optionnelle
-  const RetraitFormScreen({Key? key}) : super(key: key);
+  const RetraitFormScreen({Key? key, double? this.solde}) : super(key: key);
+  final double? solde;
 
   // Créer la méthode createState qui retourne une instance de _AddProductScreenState
   @override
@@ -87,7 +88,7 @@ class _RetraitFormScreenState extends State<RetraitFormScreen>
   final _formKey = GlobalKey<FormState>();
 
   // Créer des variables pour stocker les valeurs des champs du formulaire
-  int MontantMax = 2000;
+  double MontantMax = 0.0;
   String? _numero;
   String? _nomCompte;
   int? _montant = 0;
@@ -126,7 +127,7 @@ class _RetraitFormScreenState extends State<RetraitFormScreen>
         builder: (BuildContext context) {
           return const Splash_screen_valider_retrait(); // votre page de chargement
         });
-    await Future.delayed(const Duration(seconds: 100), () {
+    await Future.delayed(const Duration(seconds: 500), () {
       Navigator.pushNamed(context, 'main'); // fermer la feuille
     });
   }
@@ -134,6 +135,7 @@ class _RetraitFormScreenState extends State<RetraitFormScreen>
   // Créer la méthode build qui retourne le widget Scaffold
   @override
   Widget build(BuildContext context) {
+    MontantMax = widget.solde ?? 0.0;
     // Retourner le widget Scaffold avec une appbar et un body
     return Scaffold(
       appBar: AppBar(
@@ -183,7 +185,7 @@ class _RetraitFormScreenState extends State<RetraitFormScreen>
                       return 'Veuillez entrer le Montant';
                     }
                     if (int.parse(value) > MontantMax) {
-                      return 'Votre solde n\'est pas assez grand !';
+                      return 'Vous ne pouvez retirer que ${widget.solde!.toStringAsFixed(2)} XAF Maximum!';
                     }
                     if (int.parse(value) < 1000) {
                       return 'Vous ne pouvez pas retirer moins de 1000 XAF !';

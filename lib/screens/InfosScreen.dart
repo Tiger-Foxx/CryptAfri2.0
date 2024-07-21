@@ -9,8 +9,11 @@ import 'package:flutter/services.dart';
 
 class InfosPage extends StatelessWidget {
   static String email = 'cryptafri4@gmail.com';
-  static String OM = "658121197";
-  static String MOMO = "678585611";
+  static String OM = "659767344";
+  static String NomOM = "MONIQUE NDJUFFO";
+  static String NomMOMO = "Yvanna Aude Azoo";
+
+  static String MOMO = "652800807";
   static String whatsapp = '+237678585611';
   static String ERC20 = "0x5096ffdf9c2f6f26fec795b85770452e100cad50";
   static String BEP20 = "0x5096ffdf9c2f6f26fec795b85770452e100cad50";
@@ -57,7 +60,7 @@ class InfosPage extends StatelessWidget {
     },
     {
       'icon': "assets/images/OM.png",
-      'title': 'Orange Money CriptAfri \n(GAMGNE CELINE) | 658121197',
+      'title': 'Orange Money CriptAfri \n($NomOM) | $OM ',
       'data': "#150*1*1*" + OM + "#",
       'onTap': (context) {
         var number = Uri.encodeComponent("#150*1*1*" + OM + "#");
@@ -76,10 +79,10 @@ class InfosPage extends StatelessWidget {
     },
     {
       'icon': "assets/images/MOMO.png",
-      'title': 'MTN MOMO CriptAfri \n(CESAR LONTSI) | 678585611',
-      'data': MOMO,
+      'title': 'MTN MOMO CriptAfri \n($NomMOMO) | $MOMO ',
+      'data': "*126*9*$MOMO#",
       'onTap': (context) {
-        var number = Uri.encodeComponent("*126#");
+        var number = Uri.encodeComponent("*126*9*$MOMO#");
 
         // Construire l'URL
         String url = 'tel:$number';

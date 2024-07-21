@@ -94,7 +94,7 @@ class _ProductPageState extends State<ProductPage> {
             montant: (number.round()).toString(),
           ); // votre page de chargement
         });
-    await Future.delayed(const Duration(seconds: 55), () {
+    await Future.delayed(const Duration(seconds: 50), () {
       Navigator.of(context).pop(); // fermer la feuille
       FirebaseApi().sendAchatNotif();
     });

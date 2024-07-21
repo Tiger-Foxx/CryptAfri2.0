@@ -271,8 +271,7 @@ class _InvestissementScreenState extends State<InvestissementScreen> {
                     '- Intérêt hebdomadaire (4%) : 4000 XAF\n'
                     '- Intérêt versé par semaine (retirable): 4000 XAF\n\n'
                     '3. Responsabilité de Cryptafri :\n'
-                    'a. Gestion des fonds : Cryptafri s\'engage à gérer les fonds des investisseurs avec le plus grand soin et à les utiliser conformément à l\'objectif de générer des revenus récurrents. Nous nous efforcerons d\'assurer une gestion diligente et responsable des fonds investis.\n\n'
-                    'b. Clause de non-responsabilité : Cryptafri ne peut pas garantir à 100% que les rendements prévus seront atteints. La valeur des fonds investis peut être affectée par divers facteurs, y compris les conditions du marché et d\'autres circonstances économiques. Vous comprenez et acceptez que l\'investissement comporte des risques inhérents et que vous êtes seul responsable de vos décisions d\'investissement.',
+                    'a. Gestion des fonds : Cryptafri s\'engage à gérer les fonds des investisseurs avec le plus grand soin et à les utiliser conformément à l\'objectif de générer des revenus récurrents. Nous nous efforcerons d\'assurer une gestion diligente et responsable des fonds investis.\n\n',
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w400,
@@ -495,14 +494,19 @@ class __HeroWidgetState extends State<_HeroWidget> {
         'image': 'assets/images/kiss2.jpg',
       },
       {
-        'code': 'VOTRE SOLDE EN USDT',
-        'title': '${widget.compte.soldeUSDT.toStringAsFixed(2)} USDT',
-        'image': 'assets/images/kiss1.png',
-      },
-      {
         'code': 'VOTRE SOLDE RETIRABLE',
         'title': '${widget.compte.soldeRetirable.toStringAsFixed(2)} XAF',
         'image': 'assets/images/kiss3.jpg',
+      },
+      {
+        'code': 'VOTRE INVESTISSEMENT',
+        'title': '${widget.compte.investissement.toStringAsFixed(2)} XAF',
+        'image': 'assets/images/kiss1.png',
+      },
+      {
+        'code': 'VOTRE SOLDE EN USDT',
+        'title': '${widget.compte.soldeUSDT.toStringAsFixed(2)} USDT',
+        'image': 'assets/images/kiss1.png',
       },
     ];
     _pageController.addListener(() {
@@ -598,10 +602,8 @@ class __HeroWidgetState extends State<_HeroWidget> {
         left: 29,
         child: ElevatedButton(
           onPressed: () {
-            Navigator.pushNamed(
-              context,
-              'splash_retrait',
-            );
+            Navigator.pushNamed(context, 'splash_retrait',
+                arguments: {'solde': widget.compte.soldeRetirable});
           },
           style: ElevatedButton.styleFrom(
             elevation: 10,

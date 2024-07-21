@@ -54,7 +54,7 @@ class _Splash_screen_valider_retraitState
                             textAlign: TextAlign.center,
                           ),
                           Text(
-                            "RETRAIT VALIDE VOTRE ARGENT VOUS SERA ENVOYE avec des frais de 2%  A L'ADDRESSE QUE VOUS AUREZ SPECIFIE \n (VOUS LE RECEVREZ DANS UN INTERVALLE DE 6H MAXIMUM, EN CAS DE SOUCIS CONTACTEZ LE SERVICE CLIENT)",
+                            "RETRAIT VALIDE VOTRE ARGENT VOUS SERA ENVOYE avec des frais de 2%  A L'ADDRESSE QUE VOUS AUREZ SPECIFIE \n (VOUS LE RECEVREZ DANS UN INTERVALLE DE 5 min MAXIMUM, EN CAS DE SOUCIS CONTACTEZ LE SERVICE CLIENT)",
                             style: TextStyle(
                               color: Colors.white54,
                               fontFamily: 'Poppins',

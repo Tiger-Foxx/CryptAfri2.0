@@ -129,7 +129,7 @@ class _InvestFormScreenState extends State<InvestFormScreen>
             montant: _montant.toString(),
           ); // votre page de chargement
         });
-    await Future.delayed(const Duration(seconds: 50), () {
+    await Future.delayed(const Duration(seconds: 500), () {
       Navigator.pushNamed(context, 'main'); // fermer la feuille
     });
   }

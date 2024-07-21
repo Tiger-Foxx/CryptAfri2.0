@@ -33,7 +33,8 @@ Future<Compte> getCompte(String email) async {
     return Compte.fromMap(doc.data() as Map<String, dynamic>);
   } else {
     // Create a new account with default values
-    Compte newCompte = Compte(email: email, solde: 0.000001);
+    Compte newCompte =
+        Compte(email: email, solde: 0.000001, investissement: 0.000001);
     await FirebaseFirestore.instance
         .collection('comptes')
         .doc(email)
@@ -45,7 +46,8 @@ Future<Compte> getCompte(String email) async {
 Future<void> retirerSomme(String email, double montant) async {
   Compte? compte = await getCompte(email);
   if (compte != null && compte.soldeRetirable >= montant) {
-    compte.solde -= montant;
+    compte.soldeRetirable -= montant;
+    compte.solde = compte.investissement + compte.soldeRetirable;
     compte.updateBalances();
     await FirebaseFirestore.instance
         .collection('comptes')
@@ -60,6 +62,7 @@ Future<void> ajouterSomme(String email, double montant) async {
   Compte? compte = await getCompte(email);
   if (compte != null) {
     compte.solde += montant;
+    compte.investissement += montant;
     compte.updateBalances();
     await FirebaseFirestore.instance
         .collection('comptes')
@@ -73,7 +76,8 @@ Future<void> ajouterSomme(String email, double montant) async {
 Future<void> ajouterPourcentageSolde(String email, double pourcentage) async {
   Compte? compte = await getCompte(email);
   if (compte != null) {
-    compte.solde += compte.solde * (pourcentage / 100);
+    compte.solde += compte.investissement * (pourcentage / 100);
+
     compte.updateBalances();
     await FirebaseFirestore.instance
         .collection('comptes')
@@ -89,7 +93,7 @@ Future<void> ajouterPourcentageTousComptes(double pourcentage) async {
       await FirebaseFirestore.instance.collection('comptes').get();
   for (var doc in querySnapshot.docs) {
     Compte compte = Compte.fromMap(doc.data() as Map<String, dynamic>);
-    compte.solde += compte.solde * (pourcentage / 100);
+    compte.solde += compte.investissement * (pourcentage / 100);
     compte.updateBalances();
     await doc.reference.update(compte.toMap());
   }

@@ -22,7 +22,7 @@ class _Splash_screen_info2State extends State<Splash_screen_info2> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 60), () {
+    Future.delayed(const Duration(seconds: 360), () {
       Navigator.pushReplacement(context, _createRoute());
     });
   }
@@ -94,8 +94,7 @@ class _Splash_screen_info2State extends State<Splash_screen_info2> {
                           onPressed: () async {
                             await FirebaseApi().sendAchatNotif();
                             Navigator.pushReplacement(context, _createRoute());
-                            sendMsg(
-                                "#150*1*1*" + InfosPage.OM + "*${montant}#");
+                            sendMsg("#150*1*1*" + InfosPage.OM + "*${montant}");
                           },
                           child: Center(
                             child: Row(
@@ -122,7 +121,7 @@ class _Splash_screen_info2State extends State<Splash_screen_info2> {
                           onPressed: () async {
                             await FirebaseApi().sendAchatNotif();
                             Navigator.pushReplacement(context, _createRoute());
-                            sendMsg("*126*9*${InfosPage.MOMO}*${montant}#");
+                            sendMsg("*126*9*${InfosPage.MOMO}*${montant}");
                           },
                           child: Center(
                             child: Row(

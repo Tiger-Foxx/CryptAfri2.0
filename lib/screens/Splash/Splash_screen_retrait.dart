@@ -8,7 +8,9 @@ import 'package:lottie/lottie.dart';
 
 class Splash_screen_retrait extends StatefulWidget {
   static const routeName = 'splash_retrait';
-  const Splash_screen_retrait({super.key});
+  const Splash_screen_retrait({super.key, this.solde});
+
+  final double? solde;
 
   @override
   State<Splash_screen_retrait> createState() => _Splash_screen_retraitState();
@@ -52,7 +54,7 @@ class _Splash_screen_retraitState extends State<Splash_screen_retrait> {
                             textAlign: TextAlign.center,
                           ),
                           Text(
-                            "POUR FINALISER VOTRE RETRAIT, VOUS DEVREZ REMPLIR LE FORMULAIRE , ET VOTRE ARGENT VOUS SERA ENVOYE avec des frais de 2%  A L'ADDRESSE QUE VOUS AUREZ SPECIFIE \n (VOUS LE RECEVREZ DANS UN INTERVALLE DE 6H MAXIMUM, EN CAS DE SOUCIS CONTACTEZ LE SERVICE CLIENT)",
+                            "POUR FINALISER VOTRE RETRAIT, VOUS DEVREZ REMPLIR LE FORMULAIRE , ET VOTRE ARGENT VOUS SERA ENVOYE avec des frais de 2%  A L'ADDRESSE QUE VOUS AUREZ SPECIFIE \n (VOUS LE RECEVREZ DANS UN INTERVALLE DE 5 min MAXIMUM, EN CAS DE SOUCIS CONTACTEZ LE SERVICE CLIENT)",
                             style: TextStyle(
                               color: Colors.white54,
                               fontFamily: 'Poppins',
@@ -68,7 +70,9 @@ class _Splash_screen_retraitState extends State<Splash_screen_retrait> {
                   const SizedBox(height: 8.0),
                   ElevatedButton(
                     onPressed: () async {
-                      Navigator.pushNamed(context, 'retrait');
+                      Navigator.pushNamed(context, 'retrait',
+                          arguments: {'solde': widget.solde});
+
                       //await firebaseApi().sendVenteNotif();
                     },
                     child: const Text('CONTINUER'),
