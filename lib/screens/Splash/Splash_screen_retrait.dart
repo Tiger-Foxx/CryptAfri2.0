@@ -28,6 +28,7 @@ class _Splash_screen_retraitState extends State<Splash_screen_retrait> {
       child: Scaffold(
         body: Center(
           child: Container(
+            height: 1200,
             color: const Color.fromARGB(255, 42, 42, 43),
             child: Center(
               child: Column(

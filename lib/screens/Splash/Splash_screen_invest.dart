@@ -30,6 +30,7 @@ class _Splash_screen_investState extends State<Splash_screen_invest> {
         body: SingleChildScrollView(
           child: Center(
             child: Container(
+              height: 1200,
               color: const Color.fromARGB(255, 42, 42, 43),
               child: Center(
                 child: Column(

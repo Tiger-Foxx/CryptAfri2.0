@@ -31,15 +31,18 @@ class _InvestissementScreenState extends State<InvestissementScreen> {
 
   Compte? _compte;
 
-  final List<bool> _termsChecked = [false, false, false];
+  final List<bool> _termsChecked = [false, false, false, false];
   final List<String> termes = [
     "1. Objectif de l'investissement :\nL'investissement dans la plateforme Cryptafri n'implique pas l'acquisition de parts ou d'actions de la société Cryptafri. L'objectif de cet investissement est de générer des revenus récurrents pour les investisseurs grâce aux différentes activités menées par l'équipe Cryptafri.\n\n'",
     "2. Modalités d'investissement :\na. Souscription des fonds : En tant qu\'investisseur, vous pouvez placer des fonds sur la plateforme Cryptafri conformément aux modalités spécifiées dans le processus d\'investissement. Le montant minimum d\'investissement et les conditions de paiement seront clairement définis dans le processus de souscription.\n\nb. Rendement de l\'investissement : Les investisseurs recevront un intérêt de 4% sur leurs fonds investis, versé de manière hebdomadaire. Ce rendement est garanti par Cryptafri et ne dépend pas des performances de la plateforme.\n\nc. Retrait des fonds : Les fonds investis ne sont retirables qu\'après une période de 3 mois à compter de la date d\'investissement. seuls les intérêts pourrons être retirable pendant les 3 premiers mois. Passé ce délai, les investisseurs peuvent retirer leurs fonds investi à tout moment.\n\n",
     "3. Responsabilité de Cryptafri :\na. Gestion des fonds : Cryptafri s\'engage à gérer les fonds des investisseurs avec le plus grand soin et à les utiliser conformément à l\'objectif de générer des revenus récurrents. Nous nous efforcerons d\'assurer une gestion diligente et responsable des fonds investis.\n",
+    "4. Le processus d'investissement et de bénéfices dure trois mois, à l'issue desquels vous pouvez retirer la totalité de votre montant investi. Après ces trois mois, vous devez commencer un nouveau contrat d'investissement. Si vous souhaitez investir de nouveau avant la fin de ces trois mois, vous pouvez créer un nouveau compte.",
   ];
   bool _loading = true;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   String _errorMessage = '';
+  double MontantInvest = 0;
+  bool peu_investir = false;
   @override
   void initState() {
     super.initState();
@@ -64,7 +67,17 @@ class _InvestissementScreenState extends State<InvestissementScreen> {
 
           _loading = false;
         });
+        bool peu_investirVerif = await Peu_investir(getUserEmail()!);
+
+        setState(() {
+          peu_investir = peu_investirVerif;
+        });
       } else {
+        bool peu_investirVerif = await Peu_investir(getUserEmail()!);
+
+        setState(() {
+          peu_investir = peu_investirVerif;
+        });
         setState(() {
           _latestTransaction = null; // Aucun résultat trouvé
           _loading = false;
@@ -72,12 +85,22 @@ class _InvestissementScreenState extends State<InvestissementScreen> {
         });
       }
     } catch (e) {
+      bool peu_investirVerif = await Peu_investir(getUserEmail()!);
+
+      setState(() {
+        peu_investir = peu_investirVerif;
+      });
       setState(() {
         _errorMessage = 'Erreur de chargement des transactions et compte: $e';
         _loading = false;
       });
       print('Erreur de chargement des transactions et compte: $e');
     }
+    bool peu_investirVerif = await Peu_investir(getUserEmail()!);
+
+    setState(() {
+      peu_investir = peu_investirVerif;
+    });
   }
 
   void _onCheckboxChanged(int index, bool value) {
@@ -130,9 +153,19 @@ class _InvestissementScreenState extends State<InvestissementScreen> {
                 }),
                 const Divider(),
                 const SizedBox(height: 5),
-                _InvestButton(onPressed: () {
-                  _showModalBottomSheet(context);
-                }),
+                (peu_investir)
+                    ? _InvestButton(
+                        onPressed: peu_investir
+                            ? () {
+                                _showModalBottomSheet(context);
+                              }
+                            : () {
+                                return null;
+                              })
+                    : Text(
+                        "CRYPTAFRI VOUS REMERCIE POUR VOTRE CONFIANCE , PROFITEZ DE VOS BENEFICES ET ATTENDEZ 3 MOIS POUR INVESTIR A NOUVEAU!\nASTUCE : VOUS POUVEZ AUSSI CREER UN SECOND COMPTE",
+                        textAlign: TextAlign.center,
+                      ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
@@ -154,66 +187,70 @@ class _InvestissementScreenState extends State<InvestissementScreen> {
                       ),
                       color: Colors.amber,
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: _latestTransaction != null
-                          ? Column(
-                              children: [
-                                Text(
-                                  textAlign: TextAlign.center,
-                                  "DERNIERE TRANSACTION",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w700,
-                                      fontFamily: 'Poppins',
-                                      color: Colors.white70),
-                                ),
-                                Text(
-                                  textAlign: TextAlign.center,
-                                  _latestTransaction!.type.toUpperCase(),
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w700,
-                                      fontFamily: 'Poppins',
-                                      color:
-                                          _latestTransaction!.type == 'retrait'
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: _latestTransaction != null
+                              ? Column(
+                                  children: [
+                                    Text(
+                                      textAlign: TextAlign.center,
+                                      "DERNIERE TRANSACTION",
+                                      style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w700,
+                                          fontFamily: 'Poppins',
+                                          color: Colors.white70),
+                                    ),
+                                    Text(
+                                      textAlign: TextAlign.center,
+                                      _latestTransaction!.type.toUpperCase(),
+                                      style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w700,
+                                          fontFamily: 'Poppins',
+                                          color: _latestTransaction!.type ==
+                                                  'retrait'
                                               ? Colors.red
                                               : Colors.blue),
-                                ),
-                                Text(
-                                  textAlign: TextAlign.center,
-                                  "${_latestTransaction!.montant} XAF",
-                                  style: TextStyle(
-                                      fontSize: 26,
-                                      fontWeight: FontWeight.w700,
-                                      fontFamily: 'Poppins',
-                                      color: Colors.black),
-                                ),
-                                Text(
-                                  textAlign: TextAlign.center,
-                                  _latestTransaction!.valide
-                                      ? "Valide"
-                                      : "Non validé",
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w700,
-                                      fontFamily: 'Poppins',
-                                      color: _latestTransaction!.valide
-                                          ? Colors.green
-                                          : Colors.red),
-                                ),
-                              ],
-                            )
-                          : Column(
-                              children: [
-                                Center(child: CircularProgressIndicator()),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                      "Votre derniere transaction s'affichera ici "),
+                                    ),
+                                    Text(
+                                      textAlign: TextAlign.center,
+                                      "${_latestTransaction!.montant} XAF",
+                                      style: TextStyle(
+                                          fontSize: 26,
+                                          fontWeight: FontWeight.w700,
+                                          fontFamily: 'Poppins',
+                                          color: Colors.black),
+                                    ),
+                                    Text(
+                                      textAlign: TextAlign.center,
+                                      _latestTransaction!.valide
+                                          ? "Valide"
+                                          : "Non validé",
+                                      style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w700,
+                                          fontFamily: 'Poppins',
+                                          color: _latestTransaction!.valide
+                                              ? Colors.green
+                                              : Colors.red),
+                                    ),
+                                  ],
                                 )
-                              ],
-                            ),
+                              : Column(
+                                  children: [
+                                    Center(child: CircularProgressIndicator()),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                          "Votre derniere transaction s'affichera ici "),
+                                    )
+                                  ],
+                                ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -271,7 +308,8 @@ class _InvestissementScreenState extends State<InvestissementScreen> {
                     '- Intérêt hebdomadaire (4%) : 4000 XAF\n'
                     '- Intérêt versé par semaine (retirable): 4000 XAF\n\n'
                     '3. Responsabilité de Cryptafri :\n'
-                    'a. Gestion des fonds : Cryptafri s\'engage à gérer les fonds des investisseurs avec le plus grand soin et à les utiliser conformément à l\'objectif de générer des revenus récurrents. Nous nous efforcerons d\'assurer une gestion diligente et responsable des fonds investis.\n\n',
+                    'a. Gestion des fonds : Cryptafri s\'engage à gérer les fonds des investisseurs avec le plus grand soin et à les utiliser conformément à l\'objectif de générer des revenus récurrents. Nous nous efforcerons d\'assurer une gestion diligente et responsable des fonds investis.\n\n'
+                    '4.Le processus d\'investissement et de bénéfices dure trois mois, à l\'issue desquels vous pouvez retirer la totalité de votre montant investi. Après ces trois mois, vous devez commencer un nouveau contrat d\'investissement. Si vous souhaitez investir de nouveau avant la fin de ces trois mois, vous pouvez créer un nouveau compte.',
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w400,
@@ -312,7 +350,7 @@ class _InvestissementScreenState extends State<InvestissementScreen> {
                   const SizedBox(height: 16),
                   Expanded(
                     child: ListView.builder(
-                      itemCount: 3,
+                      itemCount: 4,
                       itemBuilder: (context, index) {
                         return Column(
                           children: [
