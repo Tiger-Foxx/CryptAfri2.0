@@ -14,12 +14,12 @@ class LienScreen extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.amber,
       ),
-      home: MyHomePage(),
+      home: LienPage(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class LienPage extends StatelessWidget {
   final List<Map<String, String>> links = [
     {
       'title': 'Groupes d\'informations',
@@ -73,6 +73,63 @@ class MyHomePage extends StatelessWidget {
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class LienPageWidget extends StatelessWidget {
+  final List<Map<String, String>> links = [
+    {
+      'title': 'Groupes d\'informations',
+      'description':
+          "Rejoignez notre groupe d'information et soyez informé des dernières tendances",
+      'url': 'https://t.me/+z2wGYXkuETZkODI0',
+      'image': 'assets/images/0.jpg'
+    },
+    {
+      'title': 'Services proposés',
+      'description': 'Nous vous proposons une gamme de services variées',
+      'url': 'http://t.me/cryptafrique',
+      'image': 'assets/images/0.jpg'
+    },
+  ];
+
+  void _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url, forceSafariVC: false, forceWebView: false);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Container(
+        height: 300,
+        child: ListView.builder(
+          itemCount: links.length,
+          itemBuilder: (context, index) {
+            return Card(
+              margin: EdgeInsets.all(10),
+              child: ListTile(
+                contentPadding: EdgeInsets.all(10),
+                leading:
+                    Image.asset(links[index]['image']!, width: 50, height: 50),
+                title: Text(links[index]['title']!,
+                    style: TextStyle(color: Colors.black)),
+                subtitle: Text(links[index]['description']!),
+                trailing: ElevatedButton(
+                  onPressed: () => _launchURL(links[index]['url']!),
+                  child: Text('Rejoindre'),
+                  style:
+                      ElevatedButton.styleFrom(foregroundColor: Colors.amber),
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }

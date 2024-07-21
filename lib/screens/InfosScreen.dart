@@ -1,3 +1,4 @@
+import 'package:cryptafri/screens/infosLiens.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
@@ -16,7 +17,7 @@ class InfosPage extends StatelessWidget {
   static String NomMOMO = "Yvanna Aude Azoo";
 
   static String MOMO = "652800807";
-  static String whatsapp = '+237678585611';
+  static String whatsapp = '+237679636486';
   static String ERC20 = "0x5096ffdf9c2f6f26fec795b85770452e100cad50";
   static String BEP20 = "0x5096ffdf9c2f6f26fec795b85770452e100cad50";
   static String TRC20 = "TWNBb1W76TwQ1HXwFir3SxD5D9sE3d64Lu";
@@ -260,6 +261,7 @@ class InfosPage extends StatelessWidget {
             // Le séparateur
             Divider(),
             // La liste des options
+            // LienPageWidget(),
             Expanded(
               child: ListView.builder(
                 itemCount: profileOptions.length,
