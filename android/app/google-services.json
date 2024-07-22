@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "1035793599455-ltssgeksq4c51840e0laqh2ccnskcn0b.apps.googleusercontent.com",
+          "client_id": "1035793599455-as79bi9pnpolks2mkn9fg1ea3pc6brrn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.cryptafri",
-            "certificate_hash": "92ee9508f877593347fb56151761b16f1dfac41f"
+            "certificate_hash": "7327c29569a0ed1911f5c5c52d4ba98f5d0c0c22"
           }
         },
         {
