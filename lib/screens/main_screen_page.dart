@@ -120,12 +120,15 @@ class _MainScreenPageState extends State<MainScreenPage> {
             ),
 
             BottomNavigationBarItem(
-              icon: Icon(Icons.messenger_rounded),
+              icon: Icon(Icons.notifications_active),
               label: 'News',
             ),
 
             BottomNavigationBarItem(
-              icon: Icon(Icons.link),
+              icon: Icon(
+                Icons.telegram,
+                color: Colors.blue,
+              ),
               label: 'Liens',
             ),
             BottomNavigationBarItem(

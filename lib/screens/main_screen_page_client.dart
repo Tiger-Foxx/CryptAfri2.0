@@ -71,13 +71,16 @@ class _MainScreenPage_clientState extends State<MainScreenPage_client> {
           ),
 
           BottomNavigationBarItem(
-            icon: Icon(Icons.messenger_rounded),
+            icon: Icon(Icons.notifications_active),
             label: 'News',
           ),
 
           BottomNavigationBarItem(
-            icon: Icon(Icons.link),
-            label: 'Liens',
+            icon: Icon(
+              Icons.telegram,
+              color: Colors.blue,
+            ),
+            label: 'liens',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.info),

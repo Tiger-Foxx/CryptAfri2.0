@@ -371,7 +371,8 @@ class _ProductsByNetWorkState extends State<ProductsByNetWork> {
             padding: const EdgeInsets.all(6.0),
             child: Container(
               width: double.infinity,
-              height: 300,
+              height:
+                  (parameter == 'BEP 2' || parameter == 'ERC 20') ? 140 : 250,
               child: StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
                       .collection('produits')
