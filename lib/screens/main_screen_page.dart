@@ -43,7 +43,6 @@ class _MainScreenPageState extends State<MainScreenPage> {
     const AddProductScreen(),
     const InvestissementScreen(),
     MessageFeedPage(),
-    LienScreen(),
     InfosPage(),
   ];
 
@@ -124,13 +123,6 @@ class _MainScreenPageState extends State<MainScreenPage> {
               label: 'News',
             ),
 
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.telegram,
-                color: Colors.blue,
-              ),
-              label: 'Liens',
-            ),
             BottomNavigationBarItem(
               icon: Icon(Icons.info),
               label: 'Informations',

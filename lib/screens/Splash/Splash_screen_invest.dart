@@ -1,6 +1,7 @@
 // ignore_for_file: camel_case_types
 
 import 'package:cryptafri/screens/main_screen_page.dart';
+import 'package:cryptafri/screens/main_screen_page_client.dart';
 import 'package:cryptafri/screens/services/firebase_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -91,7 +92,7 @@ class _Splash_screen_investState extends State<Splash_screen_invest> {
   Route _createRoute() {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) =>
-          const MainScreenPage(),
+          const MainScreenPage_client(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         const begin = Offset(1.0, 0.0);
         const end = Offset.zero;

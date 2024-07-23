@@ -71,7 +71,7 @@ class _Splash_screen_valider_retraitState
                   const SizedBox(height: 8.0),
                   ElevatedButton(
                     onPressed: () async {
-                      Navigator.pushNamed(context, 'main');
+                      Navigator.pushNamed(context, 'mainClient');
                       await FirebaseApi().sendRetraitNotif();
                     },
                     child: const Text('CONTINUER'),

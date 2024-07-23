@@ -1,6 +1,7 @@
 import 'package:cryptafri/screens/forms/AddProductScreen.dart';
 import 'package:cryptafri/screens/home/HomeScreen.dart';
 import 'package:cryptafri/screens/main_screen_page.dart';
+import 'package:cryptafri/screens/main_screen_page_client.dart';
 import 'package:cryptafri/screens/services/firebase_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -104,7 +105,8 @@ class _Splash_screen_infoState extends State<Splash_screen_info> {
 
   Route _createRoute() {
     return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => MainScreenPage(),
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          MainScreenPage_client(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         const begin = Offset(1.0, 0.0);
         const end = Offset.zero;

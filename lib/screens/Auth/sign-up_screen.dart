@@ -120,10 +120,24 @@ class _SignUpScreenState extends State<SignUpScreen>
 
             // Créer un widget CircularProgressIndicator qui s'affiche si l'état de la connexion est vrai
             if (_isLoading)
-              SizedBox(
-                child: CircularProgressIndicator(),
-                height: 50,
-                width: 50,
+              Column(
+                children: [
+                  SizedBox(
+                    child: CircularProgressIndicator(),
+                    height: 25,
+                    width: 25,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "si une erreur reseau se produit , n'hésitez pas à éssayer à nouveau",
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
               ),
             // Englober tous les champs de texte dans un widget Form
             Form(

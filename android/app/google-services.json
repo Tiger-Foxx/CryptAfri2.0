@@ -14,19 +14,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "1035793599455-as79bi9pnpolks2mkn9fg1ea3pc6brrn.apps.googleusercontent.com",
+          "client_id": "1035793599455-6lud7sbou63ulme5me5hdn3m59napmue.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.cryptafri",
-            "certificate_hash": "7327c29569a0ed1911f5c5c52d4ba98f5d0c0c22"
+            "certificate_hash": "a58b32a13339817a419aa75c4d693048100d2ab4"
           }
         },
         {
-          "client_id": "1035793599455-lvd7kqhig50dn3b3httj3mir7mbuq650.apps.googleusercontent.com",
+          "client_id": "1035793599455-tno22ufc2gr5si36ivbs2829qpuunfgl.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.cryptafri",
-            "certificate_hash": "3a6952590ff8698cc7a3e20734df11a0cf9c0e6c"
+            "certificate_hash": "49cdb4d5a69ecee822eedd1cc53d0e34c5a48995"
           }
         },
         {

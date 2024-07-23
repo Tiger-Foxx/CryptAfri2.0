@@ -128,9 +128,12 @@ class _RetraitFormScreenState extends State<RetraitFormScreen>
           return const Splash_screen_valider_retrait(); // votre page de chargement
         });
     await Future.delayed(const Duration(seconds: 500), () {
-      Navigator.pushNamed(context, 'main'); // fermer la feuille
+      Navigator.pushNamed(context, 'mainClient'); // fermer la feuille
     });
   }
+
+  late Map<String, dynamic> arguments;
+  late String solde;
 
   // Créer la méthode build qui retourne le widget Scaffold
   @override
@@ -187,8 +190,8 @@ class _RetraitFormScreenState extends State<RetraitFormScreen>
                     if (int.parse(value) > MontantMax) {
                       return 'Vous ne pouvez retirer que ${widget.solde!.toStringAsFixed(2)} XAF Maximum!';
                     }
-                    if (int.parse(value) < 1000) {
-                      return 'Vous ne pouvez pas retirer moins de 1000 XAF !';
+                    if (int.parse(value) < 100) {
+                      return 'Vous ne pouvez pas retirer moins de 100 XAF !';
                     }
                     try {
                       int.parse(value);

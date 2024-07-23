@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cryptafri/screens/InfosScreen.dart';
 import 'package:cryptafri/screens/Splash/Splash_screen_info2.dart';
 import 'package:cryptafri/screens/services/firebase_api.dart';
 import 'package:flutter/material.dart';
@@ -442,7 +443,7 @@ class _ProductPageState extends State<ProductPage> {
                                     "message CryptAfri " +
                                         " pour le produit " +
                                         product.name.toString(),
-                                    product.numero.toString());
+                                    InfosPage.whatsapp);
                                 print(product.name);
                                 // Appeler la fonct
                                 //sendion addToCart avec l'identifiant du produit

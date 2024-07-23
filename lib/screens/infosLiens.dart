@@ -31,7 +31,7 @@ class LienPage extends StatelessWidget {
     },
     {
       'title': 'Services proposés',
-      'description': 'Nous vous proposons une gamme de services variées',
+      'description': 'Nous vous proposons une gamme de services variés',
       'url': 'http://t.me/cryptafrique',
       'image': 'assets/images/0.jpg'
     },

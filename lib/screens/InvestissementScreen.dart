@@ -36,7 +36,7 @@ class _InvestissementScreenState extends State<InvestissementScreen> {
     "1. Objectif de l'investissement :\nL'investissement dans la plateforme Cryptafri n'implique pas l'acquisition de parts ou d'actions de la société Cryptafri. L'objectif de cet investissement est de générer des revenus récurrents pour les investisseurs grâce aux différentes activités menées par l'équipe Cryptafri.\n\n'",
     "2. Modalités d'investissement :\na. Souscription des fonds : En tant qu\'investisseur, vous pouvez placer des fonds sur la plateforme Cryptafri conformément aux modalités spécifiées dans le processus d\'investissement. Le montant minimum d\'investissement et les conditions de paiement seront clairement définis dans le processus de souscription.\n\nb. Rendement de l\'investissement : Les investisseurs recevront un intérêt de 4% sur leurs fonds investis, versé de manière hebdomadaire. Ce rendement est garanti par Cryptafri et ne dépend pas des performances de la plateforme.\n\nc. Retrait des fonds : Les fonds investis ne sont retirables qu\'après une période de 3 mois à compter de la date d\'investissement. seuls les intérêts pourrons être retirable pendant les 3 premiers mois. Passé ce délai, les investisseurs peuvent retirer leurs fonds investi à tout moment.\n\n",
     "3. Responsabilité de Cryptafri :\na. Gestion des fonds : Cryptafri s\'engage à gérer les fonds des investisseurs avec le plus grand soin et à les utiliser conformément à l\'objectif de générer des revenus récurrents. Nous nous efforcerons d\'assurer une gestion diligente et responsable des fonds investis.\n",
-    "4. Le processus d'investissement et de bénéfices dure trois mois, à l'issue desquels vous pouvez retirer la totalité de votre montant investi. Après ces trois mois, vous devez commencer un nouveau contrat d'investissement. Si vous souhaitez investir de nouveau avant la fin de ces trois mois, vous pouvez créer un nouveau compte.",
+    "4. Nous vous informons que les comptes sont soumis à une restriction d'investissement renouvelable. Ainsi, chaque compte ne pourra effectuer qu'un seul investissement renouvelable par période de 3 mois.",
   ];
   bool _loading = true;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -163,7 +163,8 @@ class _InvestissementScreenState extends State<InvestissementScreen> {
                                 return null;
                               })
                     : Text(
-                        "CRYPTAFRI VOUS REMERCIE POUR VOTRE CONFIANCE , PROFITEZ DE VOS BENEFICES ET ATTENDEZ 3 MOIS POUR INVESTIR A NOUVEAU!\nASTUCE : VOUS POUVEZ AUSSI CREER UN SECOND COMPTE",
+                        "Nous vous informons que les comptes sont soumis à une restriction d'investissement renouvelable. Ainsi, chaque compte ne pourra effectuer qu'un seul investissement renouvelable par période de 3 mois."
+                            .toUpperCase(),
                         textAlign: TextAlign.center,
                       ),
                 Padding(
@@ -309,7 +310,7 @@ class _InvestissementScreenState extends State<InvestissementScreen> {
                     '- Intérêt versé par semaine (retirable): 4000 XAF\n\n'
                     '3. Responsabilité de Cryptafri :\n'
                     'a. Gestion des fonds : Cryptafri s\'engage à gérer les fonds des investisseurs avec le plus grand soin et à les utiliser conformément à l\'objectif de générer des revenus récurrents. Nous nous efforcerons d\'assurer une gestion diligente et responsable des fonds investis.\n\n'
-                    '4.Le processus d\'investissement et de bénéfices dure trois mois, à l\'issue desquels vous pouvez retirer la totalité de votre montant investi. Après ces trois mois, vous devez commencer un nouveau contrat d\'investissement. Si vous souhaitez investir de nouveau avant la fin de ces trois mois, vous pouvez créer un nouveau compte.',
+                    '4. Nous vous informons que les comptes sont soumis à une restriction d\'investissement renouvelable. Ainsi, chaque compte ne pourra effectuer qu\'un seul investissement renouvelable par période de 3 mois.',
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w400,
@@ -640,8 +641,13 @@ class __HeroWidgetState extends State<_HeroWidget> {
         left: 29,
         child: ElevatedButton(
           onPressed: () {
-            Navigator.pushNamed(context, 'splash_retrait',
-                arguments: {'solde': widget.compte.soldeRetirable});
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    Splash_screen_retrait(solde: widget.compte.soldeRetirable),
+              ),
+            );
           },
           style: ElevatedButton.styleFrom(
             elevation: 10,

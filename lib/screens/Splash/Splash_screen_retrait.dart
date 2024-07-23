@@ -1,6 +1,8 @@
 // ignore_for_file: camel_case_types
 
+import 'package:cryptafri/screens/forms/Retrait_formScreen.dart';
 import 'package:cryptafri/screens/main_screen_page.dart';
+import 'package:cryptafri/screens/main_screen_page_client.dart';
 import 'package:cryptafri/screens/services/firebase_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,8 +24,13 @@ class _Splash_screen_retraitState extends State<Splash_screen_retrait> {
     super.initState();
   }
 
+  late Map<String, dynamic> arguments;
+  late String solde;
+  double MontantMax = 0.0;
+
   @override
   Widget build(BuildContext context) {
+    MontantMax = widget.solde ?? 0.0;
     return Center(
       child: Scaffold(
         body: Center(
@@ -71,8 +78,13 @@ class _Splash_screen_retraitState extends State<Splash_screen_retrait> {
                   const SizedBox(height: 8.0),
                   ElevatedButton(
                     onPressed: () async {
-                      Navigator.pushNamed(context, 'retrait',
-                          arguments: {'solde': widget.solde});
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              RetraitFormScreen(solde: MontantMax),
+                        ),
+                      );
 
                       //await firebaseApi().sendVenteNotif();
                     },
@@ -90,7 +102,7 @@ class _Splash_screen_retraitState extends State<Splash_screen_retrait> {
   Route _createRoute() {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) =>
-          const MainScreenPage(),
+          const MainScreenPage_client(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         const begin = Offset(1.0, 0.0);
         const end = Offset.zero;

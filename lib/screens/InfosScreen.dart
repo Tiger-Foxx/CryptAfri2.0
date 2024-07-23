@@ -62,6 +62,51 @@ class InfosPage extends StatelessWidget {
       }
     },
     {
+      'icon': "assets/images/telegram-logo-png-31.png",
+      'title':
+          'Groupes \nd\'informations : soyez informés des dernières tendances',
+      'data': "https://t.me/+z2wGYXkuETZkODI0",
+      'onTap': (context) {
+        var message =
+            'MESSAGE CRYPTAFRI ! \nASSISTANCE CLIENT\n\n\n\n Bonjour je suis : ';
+        var number = whatsapp;
+        // Encoder le message
+        String encodedMessage = Uri.encodeComponent(message);
+
+        // Construire l'URL
+        String url = 'https://t.me/+z2wGYXkuETZkODI0';
+
+        // Lancer l'URL
+        try {
+          launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+        } catch (e) {
+          print('Could not launch telegram: $e');
+        }
+      }
+    },
+    {
+      'icon': "assets/images/telegram-logo-png-31.png",
+      'title': 'Services proposés : une gamme de services variés',
+      'data': "http://t.me/cryptafrique",
+      'onTap': (context) {
+        var message =
+            'MESSAGE CRYPTAFRI ! \nASSISTANCE CLIENT\n\n\n\n Bonjour je suis : ';
+        var number = whatsapp;
+        // Encoder le message
+        String encodedMessage = Uri.encodeComponent(message);
+
+        // Construire l'URL
+        String url = 'http://t.me/cryptafrique';
+
+        // Lancer l'URL
+        try {
+          launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+        } catch (e) {
+          print('Could not launch telegram: $e');
+        }
+      }
+    },
+    {
       'icon': "assets/images/OM.png",
       'title': 'Orange Money CriptAfri \n($NomOM) | $OM ',
       'data': "#150*1*1*" + OM + "#",
@@ -205,25 +250,6 @@ class InfosPage extends StatelessWidget {
           'Informations CryptAfri',
           style: TextStyle(fontSize: 18),
         ),
-        actions: [
-          // Le bouton des notifications avec le badge
-          Padding(
-            padding: const EdgeInsets.all(13.0),
-            child: badges.Badge(
-              badgeContent: Text(
-                notificationCount.toString(),
-                style: TextStyle(color: Colors.white),
-              ),
-              child: IconButton(
-                icon: Icon(Icons.notifications),
-                onPressed: () {
-                  // La fonction à appeler lors du tap sur ce bouton
-                  // Laisser vide pour l'instant
-                },
-              ),
-            ),
-          ),
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -271,7 +297,11 @@ class InfosPage extends StatelessWidget {
                   return Column(
                     children: [
                       ListTile(
-                        leading: (index != 0 && index != 1 && index != 2)
+                        leading: (index != 0 &&
+                                index != 1 &&
+                                index != 2 &&
+                                index != 3 &&
+                                index != 4)
                             ? Icon(option['icon'], size: 35)
                             : (Image.asset(
                                 option['icon'],
