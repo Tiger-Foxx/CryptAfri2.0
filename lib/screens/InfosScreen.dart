@@ -17,7 +17,7 @@ class InfosPage extends StatelessWidget {
   static String NomMOMO = "Yvanna Aude Azoo";
 
   static String MOMO = "652800807";
-  static String whatsapp = '+237679636486';
+  static String whatsapp = '+237679636489';
   static String ERC20 = "0x5096ffdf9c2f6f26fec795b85770452e100cad50";
   static String BEP20 = "0x5096ffdf9c2f6f26fec795b85770452e100cad50";
   static String TRC20 = "TWNBb1W76TwQ1HXwFir3SxD5D9sE3d64Lu";
